@@ -2,7 +2,7 @@ import * as express from "express";
 import {myDataSource} from "./app-data-source";
 
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require('./swagger-output.json');
+const swaggerFile = require('./docs/apidoc');
 
 myDataSource
     .initialize()

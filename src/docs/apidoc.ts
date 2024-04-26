@@ -8,7 +8,7 @@ const apiDocumentation = {
     host: 'localhost:3000',
     servers: [
         {
-            url: 'http://localhost:3000',
+            url: 'localhost:3000',
             description: 'HTTP server listening on port 3000'
         }
     ],
@@ -54,6 +54,7 @@ const apiDocumentation = {
         '/comercializador/': {
             get: {
                 description: '',
+                tags: 'Comercializador',
                 responses: {
                     '200': {
                         description: 'OK'
@@ -597,3 +598,5 @@ const apiDocumentation = {
         }
     }
 }
+
+module.exports = apiDocumentation;

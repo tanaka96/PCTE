@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var app_data_source_1 = require("./app-data-source");
 var swaggerUi = require("swagger-ui-express");
-var swaggerFile = require('./swagger-output.json');
+var swaggerFile = require('./docs/apidoc');
 app_data_source_1.myDataSource
     .initialize()
     .then(function () {
