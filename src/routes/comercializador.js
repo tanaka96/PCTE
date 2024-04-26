@@ -42,7 +42,6 @@ var app_data_source_1 = require("../app-data-source");
 var comercializador = express();
 comercializador.use(express.json());
 comercializador.get("/", function (req, res) {
-    // #swagger.tags = ['Comercializador']
     return __awaiter(this, void 0, void 0, function () {
         var comercializador;
         return __generator(this, function (_a) {
