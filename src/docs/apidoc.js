@@ -54,7 +54,7 @@ var apiDocumentation = {
         '/comercializador/': {
             get: {
                 description: '',
-                tags: 'Comercializador',
+                tags: ['Comercializador'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -63,6 +63,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Comercializador'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -73,6 +74,7 @@ var apiDocumentation = {
         '/comercializador/{id}': {
             get: {
                 description: '',
+                tags: ['Comercializador'],
                 parameters: [
                     {
                         name: 'id',
@@ -89,6 +91,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Comercializador'],
                 parameters: [
                     {
                         name: 'id',
@@ -105,6 +108,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Comercializador'],
                 parameters: [
                     {
                         name: 'id',
@@ -123,6 +127,7 @@ var apiDocumentation = {
         '/desconto/': {
             get: {
                 description: '',
+                tags: ['Desconto'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -131,6 +136,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Desconto'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -141,6 +147,7 @@ var apiDocumentation = {
         '/desconto/{id}': {
             get: {
                 description: '',
+                tags: ['Desconto'],
                 parameters: [
                     {
                         name: 'id',
@@ -157,6 +164,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Desconto'],
                 parameters: [
                     {
                         name: 'id',
@@ -173,6 +181,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Desconto'],
                 parameters: [
                     {
                         name: 'id',
@@ -191,6 +200,7 @@ var apiDocumentation = {
         '/potencia/': {
             get: {
                 description: '',
+                tags: ['Potencia'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -199,6 +209,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Potencia'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -209,6 +220,7 @@ var apiDocumentation = {
         '/potencia/{id}': {
             get: {
                 description: '',
+                tags: ['Potencia'],
                 parameters: [
                     {
                         name: 'id',
@@ -225,6 +237,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Potencia'],
                 parameters: [
                     {
                         name: 'id',
@@ -241,6 +254,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Potencia'],
                 parameters: [
                     {
                         name: 'id',
@@ -259,6 +273,7 @@ var apiDocumentation = {
         '/tar/': {
             get: {
                 description: '',
+                tags: ['Tar'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -267,6 +282,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Tar'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -277,6 +293,7 @@ var apiDocumentation = {
         '/tar/{id}': {
             get: {
                 description: '',
+                tags: ['Tar'],
                 parameters: [
                     {
                         name: 'id',
@@ -293,6 +310,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Tar'],
                 parameters: [
                     {
                         name: 'id',
@@ -309,6 +327,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Tar'],
                 parameters: [
                     {
                         name: 'id',
@@ -327,6 +346,7 @@ var apiDocumentation = {
         '/tarifario/': {
             get: {
                 description: '',
+                tags: ['Tarifario'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -335,6 +355,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Tarifario'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -345,6 +366,7 @@ var apiDocumentation = {
         '/tarifario/{id}': {
             get: {
                 description: '',
+                tags: ['Tarifario'],
                 parameters: [
                     {
                         name: 'id',
@@ -361,6 +383,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Tarifario'],
                 parameters: [
                     {
                         name: 'id',
@@ -377,6 +400,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Tarifario'],
                 parameters: [
                     {
                         name: 'id',
@@ -395,6 +419,7 @@ var apiDocumentation = {
         '/taxa/': {
             get: {
                 description: '',
+                tags: ['Taxa'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -403,6 +428,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Taxa'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -413,6 +439,7 @@ var apiDocumentation = {
         '/taxa/{id}': {
             get: {
                 description: '',
+                tags: ['Taxa'],
                 parameters: [
                     {
                         name: 'id',
@@ -429,6 +456,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Taxa'],
                 parameters: [
                     {
                         name: 'id',
@@ -445,6 +473,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Taxa'],
                 parameters: [
                     {
                         name: 'id',
@@ -463,6 +492,7 @@ var apiDocumentation = {
         '/utilizador/': {
             get: {
                 description: '',
+                tags: ['Utilizador'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -471,6 +501,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Utilizador'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -481,6 +512,7 @@ var apiDocumentation = {
         '/utilizador/{id}': {
             get: {
                 description: '',
+                tags: ['Utilizador'],
                 parameters: [
                     {
                         name: 'id',
@@ -497,6 +529,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Utilizador'],
                 parameters: [
                     {
                         name: 'id',
@@ -513,6 +546,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Utilizador'],
                 parameters: [
                     {
                         name: 'id',
@@ -531,6 +565,7 @@ var apiDocumentation = {
         '/valor/': {
             get: {
                 description: '',
+                tags: ['Valor'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -539,6 +574,7 @@ var apiDocumentation = {
             },
             post: {
                 description: '',
+                tags: ['Valor'],
                 responses: {
                     '200': {
                         description: 'OK'
@@ -549,6 +585,7 @@ var apiDocumentation = {
         '/valor/{id}': {
             get: {
                 description: '',
+                tags: ['Valor'],
                 parameters: [
                     {
                         name: 'id',
@@ -565,6 +602,7 @@ var apiDocumentation = {
             },
             put: {
                 description: '',
+                tags: ['Valor'],
                 parameters: [
                     {
                         name: 'id',
@@ -581,6 +619,7 @@ var apiDocumentation = {
             },
             delete: {
                 description: '',
+                tags: ['Valor'],
                 parameters: [
                     {
                         name: 'id',
