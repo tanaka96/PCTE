@@ -11,9 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Utilizador = void 0;
 var typeorm_1 = require("typeorm");
+var crypto_1 = require("crypto");
 var Utilizador = /** @class */ (function () {
     function Utilizador() {
     }
+    Utilizador.prototype.hashPassword = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var salt = (0, crypto_1.randomBytes)(16).toString("hex");
+            (0, crypto_1.scrypt)(_this.password, salt, 64, function (err, derivedKey) {
+                console.log(_this.password);
+                err ? reject(err) : resolve(_this.password = salt + ":" + derivedKey.toString("hex"));
+            });
+        });
+    };
     __decorate([
         (0, typeorm_1.PrimaryGeneratedColumn)(),
         __metadata("design:type", Number)
@@ -42,6 +53,13 @@ var Utilizador = /** @class */ (function () {
         (0, typeorm_1.Column)(),
         __metadata("design:type", Boolean)
     ], Utilizador.prototype, "admin", void 0);
+    __decorate([
+        (0, typeorm_1.BeforeInsert)(),
+        (0, typeorm_1.BeforeUpdate)(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], Utilizador.prototype, "hashPassword", null);
     Utilizador = __decorate([
         (0, typeorm_1.Entity)()
     ], Utilizador);
