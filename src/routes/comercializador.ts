@@ -9,7 +9,6 @@ comercializador.use(express.json())
 
 
 comercializador.get("/", async function (req: Request, res: Response) {
-    // #swagger.tags = ['Comercializador']
     const comercializador = await myDataSource.getRepository(Comercializador).find()
     res.json(comercializador)
 })
