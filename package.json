@@ -5,11 +5,15 @@
   "main": "swagger.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "swagger": "node ./src/swagger.js"
+    "start": "npm run swagger & node ./src/app.js",
+    "swagger": "node ./src/swagger-autogen.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "class-validator": "^0.14.1",
+    "cookie-parser": "^1.4.6",
+    "express-validator": "^7.1.0",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.0",
     "typescript": "^5.4.3"

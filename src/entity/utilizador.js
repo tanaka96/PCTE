@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Utilizador = void 0;
 var typeorm_1 = require("typeorm");
+var class_validator_1 = require("class-validator");
 var crypto_1 = require("crypto");
 var Utilizador = /** @class */ (function () {
     function Utilizador() {
@@ -39,6 +40,7 @@ var Utilizador = /** @class */ (function () {
     ], Utilizador.prototype, "last_name", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
+        (0, class_validator_1.IsEmail)(),
         __metadata("design:type", String)
     ], Utilizador.prototype, "email", void 0);
     __decorate([

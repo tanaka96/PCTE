@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate} from "typeorm"
+import { IsEmail } from "class-validator"
 import { scrypt, randomBytes } from "crypto"
 
 @Entity()
@@ -13,6 +14,7 @@ export class Utilizador {
     last_name: string
 
     @Column()
+    @IsEmail()
     email: string
 
     @Column()

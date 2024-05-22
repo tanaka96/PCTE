@@ -1,8 +1,9 @@
 import * as express from "express";
 import {myDataSource} from "./app-data-source";
 
+const cookieParser = require("cookie-parser");
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require('./docs/apidoc');
+const swaggerFile = require('./swagger-new.json');
 
 myDataSource
     .initialize()
@@ -34,4 +35,8 @@ app.use('/valor', require('./routes/valor'))
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-app.listen(3000)
+app.use(cookieParser())
+
+app.listen(3000, () => {
+    console.log('Running on 3000');
+});
