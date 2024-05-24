@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Blog API Documentation",
+    "title": "PCTE",
     "description": "",
     "version": "1.0.0"
   },
@@ -51,11 +51,30 @@
         "tags": [
           "Comercializador"
         ],
-        "summary": "Some summary...",
-        "description": "Some description...",
+        "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
             "description": "Some description..."
@@ -141,7 +160,30 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Some description..."
           }
         }
       },
@@ -218,14 +260,43 @@
     },
     "/potencia/": {
       "get": {
+        "tags": [
+          "Potencia"
+        ],
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Some description..."
           }
         }
       },
       "post": {
+        "tags": [
+          "Potencia"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -236,6 +307,9 @@
     },
     "/potencia/{id}": {
       "get": {
+        "tags": [
+          "Potencia"
+        ],
         "description": "",
         "parameters": [
           {
@@ -252,6 +326,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Potencia"
+        ],
         "description": "",
         "parameters": [
           {
@@ -268,6 +345,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Potencia"
+        ],
         "description": "",
         "parameters": [
           {
@@ -286,14 +366,43 @@
     },
     "/tar/": {
       "get": {
+        "tags": [
+          "Tar"
+        ],
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Some description..."
           }
         }
       },
       "post": {
+        "tags": [
+          "Tar"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -304,6 +413,9 @@
     },
     "/tar/{id}": {
       "get": {
+        "tags": [
+          "Tar"
+        ],
         "description": "",
         "parameters": [
           {
@@ -320,6 +432,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Tar"
+        ],
         "description": "",
         "parameters": [
           {
@@ -336,6 +451,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Tar"
+        ],
         "description": "",
         "parameters": [
           {
@@ -354,14 +472,43 @@
     },
     "/tarifario/": {
       "get": {
+        "tags": [
+          "Tarifario"
+        ],
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Some description..."
           }
         }
       },
       "post": {
+        "tags": [
+          "Tarifario"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -372,6 +519,9 @@
     },
     "/tarifario/{id}": {
       "get": {
+        "tags": [
+          "Tarifario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -388,6 +538,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Tarifario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -404,6 +557,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Tarifario"
+        ],
         "description": "",
         "parameters": [
           {
@@ -422,14 +578,43 @@
     },
     "/taxa/": {
       "get": {
+        "tags": [
+          "Taxa"
+        ],
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Some description..."
           }
         }
       },
       "post": {
+        "tags": [
+          "Taxa"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -440,6 +625,9 @@
     },
     "/taxa/{id}": {
       "get": {
+        "tags": [
+          "Taxa"
+        ],
         "description": "",
         "parameters": [
           {
@@ -456,6 +644,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Taxa"
+        ],
         "description": "",
         "parameters": [
           {
@@ -472,6 +663,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Taxa"
+        ],
         "description": "",
         "parameters": [
           {
@@ -490,14 +684,43 @@
     },
     "/utilizador/": {
       "get": {
+        "tags": [
+          "Utilizador"
+        ],
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Some description..."
           }
         }
       },
       "post": {
+        "tags": [
+          "Utilizador"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -508,6 +731,9 @@
     },
     "/utilizador/{id}": {
       "get": {
+        "tags": [
+          "Utilizador"
+        ],
         "description": "",
         "parameters": [
           {
@@ -524,6 +750,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Utilizador"
+        ],
         "description": "",
         "parameters": [
           {
@@ -540,6 +769,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Utilizador"
+        ],
         "description": "",
         "parameters": [
           {
@@ -558,14 +790,43 @@
     },
     "/valor/": {
       "get": {
+        "tags": [
+          "Valor"
+        ],
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Some description...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "age": {
+                  "type": "number",
+                  "example": 29
+                },
+                "about": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Some description..."
           }
         }
       },
       "post": {
+        "tags": [
+          "Valor"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -576,6 +837,9 @@
     },
     "/valor/{id}": {
       "get": {
+        "tags": [
+          "Valor"
+        ],
         "description": "",
         "parameters": [
           {
@@ -592,6 +856,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Valor"
+        ],
         "description": "",
         "parameters": [
           {
@@ -608,6 +875,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Valor"
+        ],
         "description": "",
         "parameters": [
           {

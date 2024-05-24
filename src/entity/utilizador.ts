@@ -4,23 +4,23 @@ import { scrypt, randomBytes } from "crypto"
 
 @Entity()
 export class Utilizador {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id: number
 
-    @Column()
+    @Column({nullable: false})
     first_name: string
 
-    @Column()
+    @Column({nullable: false})
     last_name: string
 
-    @Column()
+    @Column({nullable: false})
     @IsEmail()
     email: string
 
-    @Column()
+    @Column({nullable: false})
     username: string
 
-    @Column()
+    @Column({nullable: false})
     password: string
 
     @Column()

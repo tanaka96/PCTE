@@ -2,8 +2,8 @@ import * as express from "express";
 import {myDataSource} from "./app-data-source";
 
 const cookieParser = require("cookie-parser");
-const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require('./swagger-new.json');
+var swaggerUi = require("swagger-ui-express");
+var swaggerFile = require('./swagger-new.json');
 
 myDataSource
     .initialize()
@@ -17,21 +17,21 @@ myDataSource
 const app = express()
 
 
-app.use('/comercializador', require('./routes/comercializador'))
+app.use('/comercializador', require('./routes/comercializador.ts'))
 
-app.use('/desconto', require('./routes/desconto'))
+app.use('/desconto', require('./routes/desconto.ts'))
 
-app.use('/potencia', require('./routes/potencia'))
+app.use('/potencia', require('./routes/potencia.ts'))
 
-app.use('/tar', require('./routes/tar'))
+app.use('/tar', require('./routes/tar.ts'))
 
-app.use('/tarifario', require('./routes/tarifario'))
+app.use('/tarifario', require('./routes/tarifario.ts'))
 
-app.use('/taxa', require('./routes/taxa'))
+app.use('/taxa', require('./routes/taxa.ts'))
 
-app.use('/utilizador', require('./routes/utilizador'))
+app.use('/utilizador', require('./routes/utilizador.ts'))
 
-app.use('/valor', require('./routes/valor'))
+app.use('/valor', require('./routes/valor.ts'))
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 

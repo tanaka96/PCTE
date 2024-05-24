@@ -8,11 +8,22 @@ const potencia = express()
 potencia.use(express.json())
 
 potencia.get("/", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Potencia']
+    /* #swagger.responses[200] = {
+          description: 'Some description...',
+          schema: {
+              name: 'John Doe',
+              age: 29,
+              about: ''
+          }
+  } */
+    // #swagger.responses[500] = { description: 'Some description...' }
     const potencia = await myDataSource.getRepository(Potencia).find()
     res.json(potencia)
 })
 
 potencia.get("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Potencia']
     const results = await myDataSource.getRepository(Potencia).findOneBy({
         id: +req.params.id,
     })
@@ -20,12 +31,14 @@ potencia.get("/:id", async function (req: Request, res: Response) {
 })
 
 potencia.post("/", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Potencia']
     const potencia = await myDataSource.getRepository(Potencia).create(req.body)
     const results = await myDataSource.getRepository(Potencia).save(potencia)
     return res.send(results)
 })
 
 potencia.put("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Potencia']
     const potencia = await myDataSource.getRepository(Potencia).findOneBy({
         id: +req.params.id,
     })
@@ -35,6 +48,7 @@ potencia.put("/:id", async function (req: Request, res: Response) {
 })
 
 potencia.delete("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Potencia']
     const results = await myDataSource.getRepository(Potencia).delete(req.params.id)
     return res.send(results)
 })

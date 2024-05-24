@@ -8,11 +8,22 @@ const utilizador = express()
 utilizador.use(express.json())
 
 utilizador.get("/", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Utilizador']
+    /* #swagger.responses[200] = {
+          description: 'Some description...',
+          schema: {
+              name: 'John Doe',
+              age: 29,
+              about: ''
+          }
+  } */
+    // #swagger.responses[500] = { description: 'Some description...' }
     const utilizador = await myDataSource.getRepository(Utilizador).find()
     res.json(utilizador)
 })
 
 utilizador.get("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Utilizador']
     const results = await myDataSource.getRepository(Utilizador).findOneBy({
         id: +req.params.id,
     })
@@ -20,12 +31,14 @@ utilizador.get("/:id", async function (req: Request, res: Response) {
 })
 
 utilizador.post("/", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Utilizador']
     const utilizador = await myDataSource.getRepository(Utilizador).create(req.body)
     const results = await myDataSource.getRepository(Utilizador).save(utilizador)
     return res.send(results)
 })
 
 utilizador.put("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Utilizador']
     const utilizador = await myDataSource.getRepository(Utilizador).findOneBy({
         id: +req.params.id,
     })
@@ -35,6 +48,7 @@ utilizador.put("/:id", async function (req: Request, res: Response) {
 })
 
 utilizador.delete("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Utilizador']
     const results = await myDataSource.getRepository(Utilizador).delete(req.params.id)
     return res.send(results)
 })

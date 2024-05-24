@@ -9,11 +9,22 @@ tarifario.use(express.json())
 
 
 tarifario.get("/", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Tarifario']
+    /* #swagger.responses[200] = {
+          description: 'Some description...',
+          schema: {
+              name: 'John Doe',
+              age: 29,
+              about: ''
+          }
+  } */
+    // #swagger.responses[500] = { description: 'Some description...' }
     const tarifario = await myDataSource.getRepository(Tarifario).find()
     res.json(tarifario)
 })
 
 tarifario.get("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Tarifario']
     const results = await myDataSource.getRepository(Tarifario).findOneBy({
         id: +req.params.id,
     })
@@ -21,12 +32,14 @@ tarifario.get("/:id", async function (req: Request, res: Response) {
 })
 
 tarifario.post("/", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Tarifario']
     const tarifario = await myDataSource.getRepository(Tarifario).create(req.body)
     const results = await myDataSource.getRepository(Tarifario).save(tarifario)
     return res.send(results)
 })
 
 tarifario.put("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Tarifario']
     const tarifario = await myDataSource.getRepository(Tarifario).findOneBy({
         id: +req.params.id,
     })
@@ -36,6 +49,7 @@ tarifario.put("/:id", async function (req: Request, res: Response) {
 })
 
 tarifario.delete("/:id", async function (req: Request, res: Response) {
+    // #swagger.tags = ['Tarifario']
     const results = await myDataSource.getRepository(Tarifario).delete(req.params.id)
     return res.send(results)
 })

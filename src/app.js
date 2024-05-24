@@ -14,14 +14,14 @@ app_data_source_1.myDataSource
     console.error("Error during Data Source initialization:", err);
 });
 var app = express();
-app.use('/comercializador', require('./routes/comercializador'));
-app.use('/desconto', require('./routes/desconto'));
-app.use('/potencia', require('./routes/potencia'));
-app.use('/tar', require('./routes/tar'));
-app.use('/tarifario', require('./routes/tarifario'));
-app.use('/taxa', require('./routes/taxa'));
-app.use('/utilizador', require('./routes/utilizador'));
-app.use('/valor', require('./routes/valor'));
+app.use('/comercializador', require('./routes/comercializador.ts'));
+app.use('/desconto', require('./routes/desconto.ts'));
+app.use('/potencia', require('./routes/potencia.ts'));
+app.use('/tar', require('./routes/tar.ts'));
+app.use('/tarifario', require('./routes/tarifario.ts'));
+app.use('/taxa', require('./routes/taxa.ts'));
+app.use('/utilizador', require('./routes/utilizador.ts'));
+app.use('/valor', require('./routes/valor.ts'));
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(cookieParser());
 app.listen(3000, function () {

@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.myDataSource = void 0;
-var typeorm_1 = require("typeorm");
+//import { DataSource } from "typeorm"
+var typeorm = require("typeorm");
 var dotenv = require('dotenv');
 dotenv.config();
-exports.myDataSource = new typeorm_1.DataSource({
+exports.myDataSource = new typeorm.DataSource({
     type: 'mysql',
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT, 10),

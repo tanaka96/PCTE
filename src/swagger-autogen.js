@@ -1,11 +1,11 @@
 const swaggerAutogen = require('swagger-autogen')();
 
 const outputFile = './swagger-new.json';
-const endpointsFiles = ['./app.js'];
+const endpointsFiles = ['./app.ts'];
 
 const config = {
     info: {
-        title: 'Blog API Documentation',
+        title: 'PCTE',
         description: '',
     },
     tags: [{

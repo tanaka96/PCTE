@@ -27,28 +27,28 @@ var Utilizador = /** @class */ (function () {
         });
     };
     __decorate([
-        (0, typeorm_1.PrimaryGeneratedColumn)(),
+        (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
         __metadata("design:type", Number)
     ], Utilizador.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)({ nullable: false }),
         __metadata("design:type", String)
     ], Utilizador.prototype, "first_name", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)({ nullable: false }),
         __metadata("design:type", String)
     ], Utilizador.prototype, "last_name", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)({ nullable: false }),
         (0, class_validator_1.IsEmail)(),
         __metadata("design:type", String)
     ], Utilizador.prototype, "email", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)({ nullable: false }),
         __metadata("design:type", String)
     ], Utilizador.prototype, "username", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)({ nullable: false }),
         __metadata("design:type", String)
     ], Utilizador.prototype, "password", void 0);
     __decorate([

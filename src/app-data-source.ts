@@ -1,9 +1,10 @@
-import { DataSource } from "typeorm"
+//import { DataSource } from "typeorm"
+const typeorm = require("typeorm");
 const dotenv = require('dotenv')
 
 dotenv.config()
 
-export const myDataSource = new DataSource({
+export const myDataSource = new typeorm.DataSource({
     type: 'mysql',
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT, 10),
