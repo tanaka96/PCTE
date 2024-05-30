@@ -39,83 +39,50 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var utilizador_1 = require("../entity/utilizador");
 var app_data_source_1 = require("../app-data-source");
+var authentification_1 = require("../middleware/authentification");
+var utilizador_controller_1 = require("../controllers/utilizador.controller");
+var authorization_1 = require("../middleware/authorization");
 var utilizador = express();
 utilizador.use(express.json());
-utilizador.get("/", function (req, res) {
-    return __awaiter(this, void 0, void 0, function () {
-        var utilizador;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).find()];
-                case 1:
-                    utilizador = _a.sent();
-                    res.json(utilizador);
-                    return [2 /*return*/];
-            }
-        });
-    });
-});
+utilizador.get("/", authentification_1.authentication, (0, authorization_1.authorization)(["admin"]), utilizador_controller_1.UtilizadorController.getUtilizadores);
 utilizador.get("/:id", function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });
 });
-utilizador.post("/", function (req, res) {
-    return __awaiter(this, void 0, void 0, function () {
-        var utilizador, results;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).create(req.body)];
-                case 1:
-                    utilizador = _a.sent();
-                    return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).save(utilizador)];
-                case 2:
-                    results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
-            }
-        });
-    });
-});
-utilizador.put("/:id", function (req, res) {
-    return __awaiter(this, void 0, void 0, function () {
-        var utilizador, results;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).findOneBy({
-                        id: +req.params.id,
-                    })];
-                case 1:
-                    utilizador = _a.sent();
-                    app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).merge(utilizador, req.body);
-                    return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).save(utilizador)];
-                case 2:
-                    results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
-            }
-        });
-    });
-});
-utilizador.delete("/:id", function (req, res) {
-    return __awaiter(this, void 0, void 0, function () {
-        var results;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador).delete(req.params.id)];
-                case 1:
-                    results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
-            }
-        });
-    });
-});
+//utilizador.post("/", async function (req: Request, res: Response) {
+// #swagger.tags = ['Utilizador']
+/* #swagger.responses[201] = {
+      description: 'Created',
+      schema: {
+          id: 1,
+          first_name: 'Example',
+          last_name: 'Example',
+          email: 'example@example.com',
+          password: 'password',
+          admin: false
+      }
+} */
+// #swagger.responses[404] = { description: 'Not Found' }
+/*const utilizador = await myDataSource.getRepository(Utilizador).create(req.body)
+const results = await myDataSource.getRepository(Utilizador).save(utilizador)
+return res.status(201).send(results)
+})*/
+utilizador.put("/:id", authentification_1.authentication, (0, authorization_1.authorization)(["user", "admin"]), utilizador_controller_1.UtilizadorController.updateUtilizadores);
+utilizador.delete("/:id", authentification_1.authentication, (0, authorization_1.authorization)(["user", "admin"]), utilizador_controller_1.UtilizadorController.deleteUtilizadores);
 module.exports = utilizador;

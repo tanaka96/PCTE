@@ -13,6 +13,6 @@ exports.myDataSource = new typeorm.DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: ["src/entity/*.js"],
-    logging: true,
-    synchronize: true,
+    //logging: true,
+    //synchronize: true,
 });

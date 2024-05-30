@@ -21,12 +21,12 @@ var Tar = /** @class */ (function () {
         __metadata("design:type", Number)
     ], Tar.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", Number)
+        (0, typeorm_1.OneToMany)(function () { return potencia_1.Potencia; }, function (potencia) { return potencia.id; }),
+        __metadata("design:type", potencia_1.Potencia)
     ], Tar.prototype, "idPotencia", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", Number)
+        (0, typeorm_1.OneToMany)(function () { return tarifario_1.Tarifario; }, function (tarifario) { return tarifario.id; }),
+        __metadata("design:type", tarifario_1.Tarifario)
     ], Tar.prototype, "idTarifario", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
@@ -36,14 +36,6 @@ var Tar = /** @class */ (function () {
         (0, typeorm_1.Column)(),
         __metadata("design:type", Number)
     ], Tar.prototype, "valorTarifario", void 0);
-    __decorate([
-        (0, typeorm_1.OneToMany)(function () { return potencia_1.Potencia; }, function (potencia) { return potencia.id; }),
-        __metadata("design:type", potencia_1.Potencia)
-    ], Tar.prototype, "potencia", void 0);
-    __decorate([
-        (0, typeorm_1.OneToMany)(function () { return tarifario_1.Tarifario; }, function (tarifario) { return tarifario.id; }),
-        __metadata("design:type", tarifario_1.Tarifario)
-    ], Tar.prototype, "tarifario", void 0);
     Tar = __decorate([
         (0, typeorm_1.Entity)()
     ], Tar);

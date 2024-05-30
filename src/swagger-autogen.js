@@ -32,6 +32,15 @@ const config = {
     }, {
         name: 'Valor',
         description: 'Endpoints',
+    }, {
+        name: 'SignUp',
+        description: 'Endpoints',
+    }, {
+        name: 'LogIn',
+        description: 'Endpoints',
+    }, {
+        name: 'Perfil',
+        description: 'Endpoints',
     }],
     host: 'localhost:3000/api',
     schemes: ['http', 'https'],

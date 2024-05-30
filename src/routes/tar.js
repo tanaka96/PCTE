@@ -60,12 +60,17 @@ tar.get("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });
@@ -81,7 +86,7 @@ tar.post("/", function (req, res) {
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).save(tar)];
                 case 2:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    return [2 /*return*/, res.status(201).send(results)];
             }
         });
     });
@@ -91,14 +96,20 @@ tar.put("/:id", function (req, res) {
         var tar, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     tar = _a.sent();
+                    _a.label = 4;
+                case 4:
                     app_data_source_1.myDataSource.getRepository(tar_1.Tar).merge(tar, req.body);
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).save(tar)];
-                case 2:
+                case 5:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
             }
@@ -110,10 +121,15 @@ tar.delete("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).delete(req.params.id)];
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).findOneBy({ id: +req.params.id })];
                 case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tar_1.Tar).delete(req.params.id)];
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });

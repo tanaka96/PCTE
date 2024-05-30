@@ -49,8 +49,7 @@ desconto.get("/", function (req, res) {
                 case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).find()];
                 case 1:
                     desconto = _a.sent();
-                    res.json(desconto);
-                    return [2 /*return*/];
+                    return [2 /*return*/, res.send(desconto)];
             }
         });
     });
@@ -60,12 +59,17 @@ desconto.get("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });
@@ -81,7 +85,7 @@ desconto.post("/", function (req, res) {
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).save(desconto)];
                 case 2:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    return [2 /*return*/, res.status(201).send(results)];
             }
         });
     });
@@ -91,14 +95,20 @@ desconto.put("/:id", function (req, res) {
         var desconto, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     desconto = _a.sent();
+                    _a.label = 4;
+                case 4:
                     app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).merge(desconto, req.body);
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).save(desconto)];
-                case 2:
+                case 5:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
             }
@@ -110,10 +120,15 @@ desconto.delete("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).delete(req.params.id)];
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).findOneBy({ id: +req.params.id })];
                 case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(desconto_1.Desconto).delete(req.params.id)];
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });

@@ -10,38 +10,71 @@ potencia.use(express.json())
 potencia.get("/", async function (req: Request, res: Response) {
     // #swagger.tags = ['Potencia']
     /* #swagger.responses[200] = {
-          description: 'Some description...',
+          description: 'Success',
           schema: {
-              name: 'John Doe',
-              age: 29,
-              about: ''
+              id: 29,
+              potencia_contratada: '1.11'
           }
   } */
-    // #swagger.responses[500] = { description: 'Some description...' }
+    // #swagger.responses[404] = { description: 'Not Found' }
     const potencia = await myDataSource.getRepository(Potencia).find()
-    res.json(potencia)
+    return res.send(potencia)
 })
 
 potencia.get("/:id", async function (req: Request, res: Response) {
     // #swagger.tags = ['Potencia']
-    const results = await myDataSource.getRepository(Potencia).findOneBy({
-        id: +req.params.id,
-    })
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              id: 29,
+              potencia_contratada: '1.11'
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
+    let results: any
+    if (!await myDataSource.getRepository(Potencia).findOneBy({id: +req.params.id})){
+        return res.status(404).send("id not found")
+    }
+    else
+        results = await myDataSource.getRepository(Potencia).findOneBy({
+            id: +req.params.id,
+        })
     return res.send(results)
 })
 
 potencia.post("/", async function (req: Request, res: Response) {
     // #swagger.tags = ['Potencia']
+    /* #swagger.responses[201] = {
+          description: 'Created',
+          schema: {
+              id: 29,
+              potencia_contratada: '1.11'
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
     const potencia = await myDataSource.getRepository(Potencia).create(req.body)
     const results = await myDataSource.getRepository(Potencia).save(potencia)
-    return res.send(results)
+    return res.status(201).send(results)
 })
 
 potencia.put("/:id", async function (req: Request, res: Response) {
     // #swagger.tags = ['Potencia']
-    const potencia = await myDataSource.getRepository(Potencia).findOneBy({
-        id: +req.params.id,
-    })
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              id: 29,
+              potencia_contratada: '1.11'
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
+    let potencia: any
+    if (!await myDataSource.getRepository(Potencia).findOneBy({id: +req.params.id})){
+        return res.status(404).send("id not found")
+    }
+    else
+        potencia = await myDataSource.getRepository(Potencia).findOneBy({
+            id: +req.params.id,
+        })
     myDataSource.getRepository(Potencia).merge(potencia, req.body)
     const results = await myDataSource.getRepository(Potencia).save(potencia)
     return res.send(results)
@@ -49,7 +82,20 @@ potencia.put("/:id", async function (req: Request, res: Response) {
 
 potencia.delete("/:id", async function (req: Request, res: Response) {
     // #swagger.tags = ['Potencia']
-    const results = await myDataSource.getRepository(Potencia).delete(req.params.id)
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              "raw": [],
+              "affected": 1
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
+    let results: any;
+    if (!await myDataSource.getRepository(Potencia).findOneBy({id: +req.params.id})){
+        return res.status(404).send("id not found")
+    }
+    else
+        results = await myDataSource.getRepository(Potencia).delete(req.params.id)
     return res.send(results)
 })
 

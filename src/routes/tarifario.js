@@ -49,8 +49,7 @@ tarifario.get("/", function (req, res) {
                 case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).find()];
                 case 1:
                     tarifario = _a.sent();
-                    res.json(tarifario);
-                    return [2 /*return*/];
+                    return [2 /*return*/, res.send(tarifario)];
             }
         });
     });
@@ -60,12 +59,17 @@ tarifario.get("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });
@@ -81,7 +85,7 @@ tarifario.post("/", function (req, res) {
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).save(tarifario)];
                 case 2:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    return [2 /*return*/, res.status(201).send(results)];
             }
         });
     });
@@ -91,14 +95,20 @@ tarifario.put("/:id", function (req, res) {
         var tarifario, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     tarifario = _a.sent();
+                    _a.label = 4;
+                case 4:
                     app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).merge(tarifario, req.body);
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).save(tarifario)];
-                case 2:
+                case 5:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
             }
@@ -110,10 +120,15 @@ tarifario.delete("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).delete(req.params.id)];
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).findOneBy({ id: +req.params.id })];
                 case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(tarifario_1.Tarifario).delete(req.params.id)];
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });

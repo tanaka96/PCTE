@@ -39,6 +39,18 @@
     {
       "name": "Valor",
       "description": "Endpoints"
+    },
+    {
+      "name": "SignUp",
+      "description": "Endpoints"
+    },
+    {
+      "name": "LogIn",
+      "description": "Endpoints"
+    },
+    {
+      "name": "Perfil",
+      "description": "Endpoints"
     }
   ],
   "schemes": [
@@ -46,6 +58,138 @@
     "https"
   ],
   "paths": {
+    "/perfil": {
+      "get": {
+        "tags": [
+          "Perfil"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@example.com"
+                },
+                "admin": {
+                  "type": "boolean",
+                  "example": false
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "tags": [
+          "SignUp"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "example": "any"
+                },
+                "last_name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "admin": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "LogIn"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/comercializador/": {
       "get": {
         "tags": [
@@ -54,21 +198,17 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
-                  "example": 29
+                  "example": 1
                 },
-                "about": {
+                "empresa": {
                   "type": "string",
-                  "example": ""
+                  "example": "Exemplo"
                 }
               },
               "xml": {
@@ -76,8 +216,8 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -87,8 +227,27 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "empresa": {
+                  "type": "string",
+                  "example": "Exemplo"
+                },
+                "id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -109,7 +268,26 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "empresa": {
+                  "type": "string",
+                  "example": "Exemplo"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -128,7 +306,26 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "empresa": {
+                  "type": "string",
+                  "example": "Exemplo"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -147,7 +344,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "affected": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -160,21 +377,21 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
-                  "example": 29
+                  "example": 1
                 },
-                "about": {
-                  "type": "string",
-                  "example": ""
+                "fatura_eletronica": {
+                  "type": "number",
+                  "example": 1
+                },
+                "debito_direto": {
+                  "type": "number",
+                  "example": 1
                 }
               },
               "xml": {
@@ -182,8 +399,8 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -193,8 +410,31 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "fatura_eletronica": {
+                  "type": "number",
+                  "example": 1
+                },
+                "debito_direto": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -215,7 +455,30 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "fatura_eletronica": {
+                  "type": "number",
+                  "example": 1
+                },
+                "debito_direto": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -234,7 +497,30 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "fatura_eletronica": {
+                  "type": "number",
+                  "example": 1
+                },
+                "debito_direto": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -253,7 +539,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "affected": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -266,21 +572,17 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
                   "example": 29
                 },
-                "about": {
+                "potencia_contratada": {
                   "type": "string",
-                  "example": ""
+                  "example": "1.11"
                 }
               },
               "xml": {
@@ -288,8 +590,8 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -299,8 +601,27 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 29
+                },
+                "potencia_contratada": {
+                  "type": "string",
+                  "example": "1.11"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -321,7 +642,26 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 29
+                },
+                "potencia_contratada": {
+                  "type": "string",
+                  "example": "1.11"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -340,7 +680,26 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 29
+                },
+                "potencia_contratada": {
+                  "type": "string",
+                  "example": "1.11"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -359,7 +718,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "affected": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -372,21 +751,29 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
-                  "example": 29
+                  "example": 1
                 },
-                "about": {
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
                   "type": "string",
-                  "example": ""
+                  "example": "0.0000"
+                },
+                "valorTarifario": {
+                  "type": "string",
+                  "example": "0.0000"
                 }
               },
               "xml": {
@@ -394,8 +781,8 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -405,8 +792,39 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "valorTarifario": {
+                  "type": "string",
+                  "example": "0.0000"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -427,7 +845,38 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "valorTarifario": {
+                  "type": "string",
+                  "example": "0.0000"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -446,7 +895,38 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "valorTarifario": {
+                  "type": "string",
+                  "example": "0.0000"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -465,7 +945,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "affected": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -478,21 +978,25 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
-                  "example": 29
+                  "example": 1
                 },
-                "about": {
+                "tipo": {
                   "type": "string",
-                  "example": ""
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
+                },
+                "contrato": {
+                  "type": "string",
+                  "example": "Particular"
                 }
               },
               "xml": {
@@ -500,8 +1004,8 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -511,8 +1015,35 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo": {
+                  "type": "string",
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
+                },
+                "contrato": {
+                  "type": "string",
+                  "example": "Particular"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -533,7 +1064,34 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo": {
+                  "type": "string",
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
+                },
+                "contrato": {
+                  "type": "string",
+                  "example": "Particular"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -552,7 +1110,34 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo": {
+                  "type": "string",
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
+                },
+                "contrato": {
+                  "type": "string",
+                  "example": "Particular"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -571,7 +1156,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "affected": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -584,21 +1189,21 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
-                  "example": 29
+                  "example": 1
                 },
-                "about": {
+                "nome": {
                   "type": "string",
-                  "example": ""
+                  "example": "IVA"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "1.111"
                 }
               },
               "xml": {
@@ -606,8 +1211,8 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -617,8 +1222,31 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "IVA"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "1.111"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -639,7 +1267,30 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "IVA"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "1.111"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -658,7 +1309,30 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "IVA"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "1.111"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -677,7 +1351,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "affected": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -688,23 +1382,42 @@
           "Utilizador"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
-                  "example": 29
+                  "example": 1
                 },
-                "about": {
+                "first_name": {
                   "type": "string",
-                  "example": ""
+                  "example": "Example"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "admin": {
+                  "type": "boolean",
+                  "example": false
                 }
               },
               "xml": {
@@ -712,19 +1425,14 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Utilizador"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -745,7 +1453,42 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "admin": {
+                  "type": "boolean",
+                  "example": false
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -760,11 +1503,81 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "example": "any"
+                },
+                "last_name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "admin": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "admin": {
+                  "type": "boolean",
+                  "example": false
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -779,11 +1592,37 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Utilizador eliminado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -796,21 +1635,37 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Some description...",
+            "description": "Success",
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "John Doe"
-                },
-                "age": {
+                "id": {
                   "type": "number",
-                  "example": 29
+                  "example": 1
                 },
-                "about": {
-                  "type": "string",
-                  "example": ""
+                "idComercializador": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "valorEnergia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizado": {
+                  "type": "number",
+                  "example": 1995
                 }
               },
               "xml": {
@@ -818,8 +1673,8 @@
               }
             }
           },
-          "500": {
-            "description": "Some description..."
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -829,8 +1684,47 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idComercializador": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "valorEnergia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizado": {
+                  "type": "number",
+                  "example": 1995
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -851,7 +1745,46 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idComercializador": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "valorEnergia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizado": {
+                  "type": "number",
+                  "example": 1995
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -870,7 +1803,46 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idComercializador": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idPotencia": {
+                  "type": "number",
+                  "example": 1
+                },
+                "idTarifario": {
+                  "type": "number",
+                  "example": 1
+                },
+                "valorPotencia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "valorEnergia": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizado": {
+                  "type": "number",
+                  "example": 1995
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -889,7 +1861,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "raw": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "affected": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }

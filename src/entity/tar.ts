@@ -7,11 +7,11 @@ export class Tar {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
-    idPotencia: number
+    @OneToMany(() => Potencia, (potencia) => potencia.id)
+    idPotencia: Potencia
 
-    @Column()
-    idTarifario: number
+    @OneToMany(() => Tarifario, (tarifario) => tarifario.id)
+    idTarifario: Tarifario
 
     @Column()
     valorPotencia: number
@@ -19,9 +19,4 @@ export class Tar {
     @Column()
     valorTarifario: number
 
-    @OneToMany(() => Potencia, (potencia) => potencia.id)
-    potencia: Potencia
-
-    @OneToMany(() => Tarifario, (tarifario) => tarifario.id)
-    tarifario: Tarifario
 }

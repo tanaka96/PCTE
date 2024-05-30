@@ -10,38 +10,83 @@ tar.use(express.json())
 tar.get("/", async function (req: Request, res: Response) {
     // #swagger.tags = ['Tar']
     /* #swagger.responses[200] = {
-          description: 'Some description...',
+          description: 'Success',
           schema: {
-              name: 'John Doe',
-              age: 29,
-              about: ''
+              id: 1,
+              idPotencia: 1,
+              idTarifario: 1,
+              valorPotencia: '0.0000',
+              valorTarifario: '0.0000'
           }
   } */
-    // #swagger.responses[500] = { description: 'Some description...' }
+    // #swagger.responses[404] = { description: 'Not Found' }
     const tar = await myDataSource.getRepository(Tar).find()
     res.json(tar)
 })
 
 tar.get("/:id", async function (req: Request, res: Response) {
     // #swagger.tags = ['Tar']
-    const results = await myDataSource.getRepository(Tar).findOneBy({
-        id: +req.params.id,
-    })
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              id: 1,
+              idPotencia: 1,
+              idTarifario: 1,
+              valorPotencia: '0.0000',
+              valorTarifario: '0.0000'
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
+    let results: any
+    if (!await myDataSource.getRepository(Tar).findOneBy({id: +req.params.id})){
+        return res.status(404).send("id not found")
+    }
+    else
+        results = await myDataSource.getRepository(Tar).findOneBy({
+            id: +req.params.id,
+        })
     return res.send(results)
 })
 
 tar.post("/", async function (req: Request, res: Response) {
     // #swagger.tags = ['Tar']
+    /* #swagger.responses[201] = {
+          description: 'Created',
+          schema: {
+              id: 1,
+              idPotencia: 1,
+              idTarifario: 1,
+              valorPotencia: '0.0000',
+              valorTarifario: '0.0000'
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
     const tar = await myDataSource.getRepository(Tar).create(req.body)
     const results = await myDataSource.getRepository(Tar).save(tar)
-    return res.send(results)
+    return res.status(201).send(results)
 })
 
 tar.put("/:id", async function (req: Request, res: Response) {
     // #swagger.tags = ['Tar']
-    const tar = await myDataSource.getRepository(Tar).findOneBy({
-        id: +req.params.id,
-    })
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              id: 1,
+              idPotencia: 1,
+              idTarifario: 1,
+              valorPotencia: '0.0000',
+              valorTarifario: '0.0000'
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
+    let tar: any
+    if (!await myDataSource.getRepository(Tar).findOneBy({id: +req.params.id})){
+        return res.status(404).send("id not found")
+    }
+    else
+        tar = await myDataSource.getRepository(Tar).findOneBy({
+            id: +req.params.id,
+        })
     myDataSource.getRepository(Tar).merge(tar, req.body)
     const results = await myDataSource.getRepository(Tar).save(tar)
     return res.send(results)
@@ -49,7 +94,20 @@ tar.put("/:id", async function (req: Request, res: Response) {
 
 tar.delete("/:id", async function (req: Request, res: Response) {
     // #swagger.tags = ['Tar']
-    const results = await myDataSource.getRepository(Tar).delete(req.params.id)
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              "raw": [],
+              "affected": 1
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
+    let results: any;
+    if (!await myDataSource.getRepository(Tar).findOneBy({id: +req.params.id})){
+        return res.status(404).send("id not found")
+    }
+    else
+        results = await myDataSource.getRepository(Tar).delete(req.params.id)
     return res.send(results)
 })
 

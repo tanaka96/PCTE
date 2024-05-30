@@ -46,11 +46,13 @@ comercializador.get("/", function (req, res) {
         var comercializador;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).find()];
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).find()
+                    //res.json(comercializador)
+                ];
                 case 1:
                     comercializador = _a.sent();
-                    res.json(comercializador);
-                    return [2 /*return*/];
+                    //res.json(comercializador)
+                    return [2 /*return*/, res.send(comercializador)];
             }
         });
     });
@@ -60,12 +62,17 @@ comercializador.get("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });
@@ -81,7 +88,7 @@ comercializador.post("/", function (req, res) {
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).save(comercializador)];
                 case 2:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    return [2 /*return*/, res.status(201).send(results)];
             }
         });
     });
@@ -91,14 +98,20 @@ comercializador.put("/:id", function (req, res) {
         var comercializador, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({ id: +req.params.id })];
+                case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({
                         id: +req.params.id,
                     })];
-                case 1:
+                case 3:
                     comercializador = _a.sent();
+                    _a.label = 4;
+                case 4:
                     app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).merge(comercializador, req.body);
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).save(comercializador)];
-                case 2:
+                case 5:
                     results = _a.sent();
                     return [2 /*return*/, res.send(results)];
             }
@@ -110,10 +123,15 @@ comercializador.delete("/:id", function (req, res) {
         var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).delete(req.params.id)];
+                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({ id: +req.params.id })];
                 case 1:
+                    if (!!(_a.sent())) return [3 /*break*/, 2];
+                    return [2 /*return*/, res.status(404).send("id not found")];
+                case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).delete(req.params.id)];
+                case 3:
                     results = _a.sent();
-                    return [2 /*return*/, res.send(results)];
+                    _a.label = 4;
+                case 4: return [2 /*return*/, res.send(results)];
             }
         });
     });
