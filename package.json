@@ -2,11 +2,10 @@
   "name": "pcte2",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "swagger-autogen.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run swagger & ts-node-esm ./src/app.ts",
+    "start": "npm run swagger & nodemon ./src/app.ts",
     "swagger": "node ./src/swagger-autogen.js"
   },
   "author": "",
