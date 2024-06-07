@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.encrypt = void 0;
 var jwt = require("jsonwebtoken");
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 var dotenv = require("dotenv");
 dotenv.config();
 var encrypt = /** @class */ (function () {
