@@ -12,7 +12,7 @@ export const myDataSource = new typeorm.DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: ["src/entity/*.js"],
-    timeout: 20000,
+    timeout: 60000,
     waitForConnections: true,
     //logging: true,
     //synchronize: true,
