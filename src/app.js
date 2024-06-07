@@ -10,12 +10,9 @@ var resultado_controller_1 = require("./controllers/resultado.controller");
 var cookieParser = require("cookie-parser");
 var swaggerUi = require("swagger-ui-express");
 var swaggerFile = require('./swagger-new.json');
-app_data_source_1.myDataSource
-    .initialize()
-    .then(function () {
+app_data_source_1.myDataSource.initialize().then(function () {
     console.log("Data Source has been initialized!");
-})
-    .catch(function (err) {
+}).catch(function (err) {
     console.error("Error during Data Source initialization:", err);
 });
 var app = express();

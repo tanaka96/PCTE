@@ -11,12 +11,9 @@ const cookieParser = require("cookie-parser");
 var swaggerUi = require("swagger-ui-express");
 var swaggerFile = require('./swagger-new.json');
 
-myDataSource
-    .initialize()
-    .then(() => {
+myDataSource.initialize().then(() => {
         console.log("Data Source has been initialized!")
-    })
-    .catch((err) => {
+    }).catch((err) => {
         console.error("Error during Data Source initialization:", err)
     })
 
