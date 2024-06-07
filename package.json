@@ -4,7 +4,6 @@
   "description": "",
   "main": "swagger-autogen.js",
   "scripts": {
-    "prestart": "chmod +x node_modules/.bin/ts-node",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run swagger & nodemon ./src/app.ts",
     "swagger": "node ./src/swagger-autogen.js"
