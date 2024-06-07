@@ -52,7 +52,7 @@ var encrypt = /** @class */ (function () {
         });
     };
     encrypt.comparePassword = function (password, encryptedPassword) {
-        return bcrypt.compare(password, encryptedPassword);
+        return bcrypt.compareSync(password, encryptedPassword);
     };
     encrypt.generateToken = function (payload) {
         return jwt.sign(payload, process.env.TOKEN_SECRET, {});

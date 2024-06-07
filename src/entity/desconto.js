@@ -20,12 +20,12 @@ var Desconto = /** @class */ (function () {
     ], Desconto.prototype, "id", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
-        __metadata("design:type", Number)
-    ], Desconto.prototype, "fatura_eletronica", void 0);
+        __metadata("design:type", String)
+    ], Desconto.prototype, "tipo", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", Number)
-    ], Desconto.prototype, "debito_direto", void 0);
+    ], Desconto.prototype, "percentagem", void 0);
     Desconto = __decorate([
         (0, typeorm_1.Entity)()
     ], Desconto);

@@ -76,12 +76,15 @@ valor.get("/:id", function (req, res) {
 });
 valor.post("/", function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var valor, results;
+        var hoje, valor, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor).create(req.body)];
+                case 0:
+                    hoje = new Date();
+                    return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor)];
                 case 1:
                     valor = _a.sent();
+                    valor.create(req.body, valor.atualizacao = hoje);
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor).save(valor)];
                 case 2:
                     results = _a.sent();
@@ -92,10 +95,12 @@ valor.post("/", function (req, res) {
 });
 valor.put("/:id", function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var valor, results;
+        var hoje, valor, results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor).findOneBy({ id: +req.params.id })];
+                case 0:
+                    hoje = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+                    return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor).findOneBy({ id: +req.params.id })];
                 case 1:
                     if (!!(_a.sent())) return [3 /*break*/, 2];
                     return [2 /*return*/, res.status(404).send("id not found")];
@@ -106,7 +111,7 @@ valor.put("/:id", function (req, res) {
                     valor = _a.sent();
                     _a.label = 4;
                 case 4:
-                    app_data_source_1.myDataSource.getRepository(valor_1.Valor).merge(valor, req.body);
+                    app_data_source_1.myDataSource.getRepository(valor_1.Valor).merge(valor, req.body, valor.atualizacao = hoje);
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor).save(valor)];
                 case 5:
                     results = _a.sent();

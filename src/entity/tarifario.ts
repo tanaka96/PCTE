@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import {Tar} from "./tar";
 
 @Entity()
 export class Tarifario {

@@ -1,22 +1,26 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm"
-import { Potencia } from "./potencia";
-import { Tarifario } from "./tarifario";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
 export class Tar {
     @PrimaryGeneratedColumn()
     id: number
 
-    @OneToMany(() => Potencia, (potencia) => potencia.id)
-    idPotencia: Potencia
-
-    @OneToMany(() => Tarifario, (tarifario) => tarifario.id)
-    idTarifario: Tarifario
+    @Column("decimal", {precision: 4, scale: 2})
+    potencia: number
 
     @Column()
+    tarifario: string
+
+    @Column("decimal", {precision: 5, scale: 4})
     valorPotencia: number
 
-    @Column()
-    valorTarifario: number
+    @Column("decimal", {precision: 5, scale: 4})
+    simples: number
+
+    @Column("decimal", {precision: 5, scale: 4})
+    vazio: number
+
+    @Column("decimal", {precision: 5, scale: 4})
+    naoVazio: number
 
 }

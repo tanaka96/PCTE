@@ -11,9 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Valor = void 0;
 var typeorm_1 = require("typeorm");
-var comercializador_1 = require("./comercializador");
-var potencia_1 = require("./potencia");
-var tarifario_1 = require("./tarifario");
 var Valor = /** @class */ (function () {
     function Valor() {
     }
@@ -22,25 +19,37 @@ var Valor = /** @class */ (function () {
         __metadata("design:type", Number)
     ], Valor.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.OneToMany)(function () { return comercializador_1.Comercializador; }, function (comercializador) { return comercializador.id; }),
-        __metadata("design:type", comercializador_1.Comercializador)
-    ], Valor.prototype, "idComercializador", void 0);
+        (0, typeorm_1.Column)(),
+        __metadata("design:type", String)
+    ], Valor.prototype, "comercializador", void 0);
     __decorate([
-        (0, typeorm_1.OneToMany)(function () { return potencia_1.Potencia; }, function (potencia) { return potencia.id; }),
-        __metadata("design:type", potencia_1.Potencia)
-    ], Valor.prototype, "idPotencia", void 0);
-    __decorate([
-        (0, typeorm_1.OneToMany)(function () { return tarifario_1.Tarifario; }, function (tarifario) { return tarifario.id; }),
-        __metadata("design:type", tarifario_1.Tarifario)
-    ], Valor.prototype, "idTarifario", void 0);
+        (0, typeorm_1.Column)("decimal", { precision: 4, scale: 2 }),
+        __metadata("design:type", Number)
+    ], Valor.prototype, "potencia", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
+        __metadata("design:type", String)
+    ], Valor.prototype, "tarifario", void 0);
+    __decorate([
+        (0, typeorm_1.Column)(),
+        __metadata("design:type", String)
+    ], Valor.prototype, "valor", void 0);
+    __decorate([
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
         __metadata("design:type", Number)
     ], Valor.prototype, "valorPotencia", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
         __metadata("design:type", Number)
-    ], Valor.prototype, "valorEnergia", void 0);
+    ], Valor.prototype, "valorSimples", void 0);
+    __decorate([
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
+        __metadata("design:type", Number)
+    ], Valor.prototype, "valorVazio", void 0);
+    __decorate([
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
+        __metadata("design:type", Number)
+    ], Valor.prototype, "valorNaoVazio", void 0);
     __decorate([
         (0, typeorm_1.UpdateDateColumn)(),
         __metadata("design:type", Date)

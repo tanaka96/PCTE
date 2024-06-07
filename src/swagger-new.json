@@ -51,6 +51,10 @@
     {
       "name": "Perfil",
       "description": "Endpoints"
+    },
+    {
+      "name": "Resultado",
+      "description": "Endpoints"
     }
   ],
   "schemes": [
@@ -94,8 +98,8 @@
                   "example": "example@example.com"
                 },
                 "admin": {
-                  "type": "boolean",
-                  "example": false
+                  "type": "string",
+                  "example": "user"
                 }
               },
               "xml": {
@@ -183,6 +187,51 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/resultado": {
+      "post": {
+        "tags": [
+          "Resultado"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "potencia": {
+                  "example": "any"
+                },
+                "tarifa": {
+                  "example": "any"
+                },
+                "dias": {
+                  "example": "any"
+                },
+                "vazio": {
+                  "example": "any"
+                },
+                "ponta": {
+                  "example": "any"
+                },
+                "cheio": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"
@@ -385,11 +434,11 @@
                   "type": "number",
                   "example": 1
                 },
-                "fatura_eletronica": {
-                  "type": "number",
-                  "example": 1
+                "tipo": {
+                  "type": "string",
+                  "example": "Fatura Eletronica"
                 },
-                "debito_direto": {
+                "percentagem": {
                   "type": "number",
                   "example": 1
                 }
@@ -419,11 +468,11 @@
                   "type": "number",
                   "example": 1
                 },
-                "fatura_eletronica": {
-                  "type": "number",
-                  "example": 1
+                "tipo": {
+                  "type": "string",
+                  "example": "Fatura Eletronica"
                 },
-                "debito_direto": {
+                "percentagem": {
                   "type": "number",
                   "example": 1
                 }
@@ -463,11 +512,11 @@
                   "type": "number",
                   "example": 1
                 },
-                "fatura_eletronica": {
-                  "type": "number",
-                  "example": 1
+                "tipo": {
+                  "type": "string",
+                  "example": "Fatura Eletronica"
                 },
-                "debito_direto": {
+                "percentagem": {
                   "type": "number",
                   "example": 1
                 }
@@ -505,11 +554,11 @@
                   "type": "number",
                   "example": 1
                 },
-                "fatura_eletronica": {
-                  "type": "number",
-                  "example": 1
+                "tipo": {
+                  "type": "string",
+                  "example": "Fatura Eletronica"
                 },
-                "debito_direto": {
+                "percentagem": {
                   "type": "number",
                   "example": 1
                 }
@@ -759,19 +808,27 @@
                   "type": "number",
                   "example": 1
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
                 },
                 "valorPotencia": {
                   "type": "string",
                   "example": "0.0000"
                 },
-                "valorTarifario": {
+                "simples": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "vazio": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "naoVazio": {
                   "type": "string",
                   "example": "0.0000"
                 }
@@ -801,19 +858,27 @@
                   "type": "number",
                   "example": 1
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
                 },
                 "valorPotencia": {
                   "type": "string",
                   "example": "0.0000"
                 },
-                "valorTarifario": {
+                "simples": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "vazio": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "naoVazio": {
                   "type": "string",
                   "example": "0.0000"
                 }
@@ -853,19 +918,27 @@
                   "type": "number",
                   "example": 1
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
                 },
                 "valorPotencia": {
                   "type": "string",
                   "example": "0.0000"
                 },
-                "valorTarifario": {
+                "simples": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "vazio": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "naoVazio": {
                   "type": "string",
                   "example": "0.0000"
                 }
@@ -903,19 +976,27 @@
                   "type": "number",
                   "example": 1
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
                 },
                 "valorPotencia": {
                   "type": "string",
                   "example": "0.0000"
                 },
-                "valorTarifario": {
+                "simples": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "vazio": {
+                  "type": "string",
+                  "example": "0.0000"
+                },
+                "naoVazio": {
                   "type": "string",
                   "example": "0.0000"
                 }
@@ -1643,29 +1724,41 @@
                   "type": "number",
                   "example": 1
                 },
-                "idComercializador": {
-                  "type": "number",
-                  "example": 1
+                "comercializador": {
+                  "type": "string",
+                  "example": "EDP"
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
                 },
                 "valorPotencia": {
                   "type": "number",
                   "example": 0
                 },
-                "valorEnergia": {
+                "valorSimples": {
                   "type": "number",
                   "example": 0
                 },
-                "atualizado": {
+                "valorVazio": {
                   "type": "number",
-                  "example": 1995
+                  "example": 0
+                },
+                "valorNaoVazio": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizacao": {
+                  "type": "number",
+                  "example": 16.866666666666667
                 }
               },
               "xml": {
@@ -1693,29 +1786,41 @@
                   "type": "number",
                   "example": 1
                 },
-                "idComercializador": {
-                  "type": "number",
-                  "example": 1
+                "comercializador": {
+                  "type": "string",
+                  "example": "EDP"
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
                 },
                 "valorPotencia": {
                   "type": "number",
                   "example": 0
                 },
-                "valorEnergia": {
+                "valorSimples": {
                   "type": "number",
                   "example": 0
                 },
-                "atualizado": {
+                "valorVazio": {
                   "type": "number",
-                  "example": 1995
+                  "example": 0
+                },
+                "valorNaoVazio": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizacao": {
+                  "type": "number",
+                  "example": 16.866666666666667
                 }
               },
               "xml": {
@@ -1753,29 +1858,41 @@
                   "type": "number",
                   "example": 1
                 },
-                "idComercializador": {
-                  "type": "number",
-                  "example": 1
+                "comercializador": {
+                  "type": "string",
+                  "example": "EDP"
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
                 },
                 "valorPotencia": {
                   "type": "number",
                   "example": 0
                 },
-                "valorEnergia": {
+                "valorSimples": {
                   "type": "number",
                   "example": 0
                 },
-                "atualizado": {
+                "valorVazio": {
                   "type": "number",
-                  "example": 1995
+                  "example": 0
+                },
+                "valorNaoVazio": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizacao": {
+                  "type": "number",
+                  "example": 16.866666666666667
                 }
               },
               "xml": {
@@ -1811,29 +1928,41 @@
                   "type": "number",
                   "example": 1
                 },
-                "idComercializador": {
-                  "type": "number",
-                  "example": 1
+                "comercializador": {
+                  "type": "string",
+                  "example": "EDP"
                 },
-                "idPotencia": {
-                  "type": "number",
-                  "example": 1
+                "potencia": {
+                  "type": "string",
+                  "example": "1.15"
                 },
-                "idTarifario": {
-                  "type": "number",
-                  "example": 1
+                "tarifario": {
+                  "type": "string",
+                  "example": "Simples"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Fixo"
                 },
                 "valorPotencia": {
                   "type": "number",
                   "example": 0
                 },
-                "valorEnergia": {
+                "valorSimples": {
                   "type": "number",
                   "example": 0
                 },
-                "atualizado": {
+                "valorVazio": {
                   "type": "number",
-                  "example": 1995
+                  "example": 0
+                },
+                "valorNaoVazio": {
+                  "type": "number",
+                  "example": 0
+                },
+                "atualizacao": {
+                  "type": "number",
+                  "example": 16.866666666666667
                 }
               },
               "xml": {

@@ -6,6 +6,7 @@ var utilizador_controller_1 = require("./controllers/utilizador.controller");
 var auth_controller_1 = require("./controllers/auth.controller");
 var authentification_1 = require("./middleware/authentification");
 var authorization_1 = require("./middleware/authorization");
+var resultado_controller_1 = require("./controllers/resultado.controller");
 var cookieParser = require("cookie-parser");
 var swaggerUi = require("swagger-ui-express");
 var swaggerFile = require('./swagger-new.json');
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.get("/perfil", authentification_1.authentication, (0, authorization_1.authorization)(["user", "admin"]), auth_controller_1.AuthController.getProfile);
 app.post("/signup", utilizador_controller_1.UtilizadorController.signUp);
 app.post("/login", auth_controller_1.AuthController.login);
+app.post("/resultado", resultado_controller_1.ResultadoController.Resultado);
 app.listen(3000, function () {
     console.log('Running on 3000');
 });

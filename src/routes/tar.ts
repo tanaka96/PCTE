@@ -13,10 +13,12 @@ tar.get("/", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              potencia: '1.15',
+              tarifario: 'Simples',
               valorPotencia: '0.0000',
-              valorTarifario: '0.0000'
+              simples: '0.0000',
+              vazio: '0.0000',
+              naoVazio: '0.0000'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -30,10 +32,12 @@ tar.get("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              potencia: '1.15',
+              tarifario: 'Simples',
               valorPotencia: '0.0000',
-              valorTarifario: '0.0000'
+              simples: '0.0000',
+              vazio: '0.0000',
+              naoVazio: '0.0000'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -54,10 +58,12 @@ tar.post("/", async function (req: Request, res: Response) {
           description: 'Created',
           schema: {
               id: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              potencia: '1.15',
+              tarifario: 'Simples',
               valorPotencia: '0.0000',
-              valorTarifario: '0.0000'
+              simples: '0.0000',
+              vazio: '0.0000',
+              naoVazio: '0.0000'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -72,10 +78,12 @@ tar.put("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              potencia: '1.15',
+              tarifario: 'Simples',
               valorPotencia: '0.0000',
-              valorTarifario: '0.0000'
+              simples: '0.0000',
+              vazio: '0.0000',
+              naoVazio: '0.0000'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }

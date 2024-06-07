@@ -14,7 +14,7 @@ export class AuthController {
             const utilizadorRep = myDataSource.getRepository(Utilizador);
             const utilizador = await utilizadorRep.findOne({where: { email }});
 
-            const validPassword = encrypt.comparePassword(utilizador.password, password);
+            const validPassword = encrypt.comparePassword(password, utilizador.password);
             if (!utilizador || !validPassword) {
                 return res.status(404).json({message: "Utilizador não encontrado!"});
             }

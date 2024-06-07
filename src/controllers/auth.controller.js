@@ -69,7 +69,7 @@ var AuthController = /** @class */ (function () {
                         return [4 /*yield*/, utilizadorRep.findOne({ where: { email: email } })];
                     case 1:
                         utilizador = _b.sent();
-                        validPassword = encrypt_1.encrypt.comparePassword(utilizador.password, password);
+                        validPassword = encrypt_1.encrypt.comparePassword(password, utilizador.password);
                         if (!utilizador || !validPassword) {
                             return [2 /*return*/, res.status(404).json({ message: "Utilizador não encontrado!" })];
                         }

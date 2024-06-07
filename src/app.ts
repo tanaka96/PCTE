@@ -3,7 +3,8 @@ import {myDataSource} from "./app-data-source";
 import { UtilizadorController } from "./controllers/utilizador.controller";
 import { AuthController } from "./controllers/auth.controller";
 import { authentication } from "./middleware/authentification";
-import {authorization} from "./middleware/authorization";
+import { authorization } from "./middleware/authorization";
+import { ResultadoController } from "./controllers/resultado.controller";
 
 
 const cookieParser = require("cookie-parser");
@@ -53,7 +54,7 @@ app.get("/perfil", authentication, authorization(["user", "admin"]), AuthControl
               first_name: 'Example',
               last_name: 'Example',
               email: 'example@example.com',
-              admin: false
+              admin: 'user'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -65,6 +66,10 @@ app.post("/signup", UtilizadorController.signUp,
 
 app.post("/login", AuthController.login,
     // #swagger.tags = ['LogIn']
+);
+
+app.post("/resultado", ResultadoController.Resultado,
+    // #swagger.tags = ['Resultado']
 );
 
 

@@ -41,6 +41,9 @@ const config = {
     }, {
         name: 'Perfil',
         description: 'Endpoints',
+    }, {
+        name: 'Resultado',
+        description: 'Endpoints',
     }],
     host: 'localhost:3000/api',
     schemes: ['http', 'https'],

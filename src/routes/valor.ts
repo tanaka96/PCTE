@@ -13,12 +13,15 @@ valor.get("/", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              idComercializador: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              comercializador: 'EDP',
+              potencia: '1.15',
+              tarifario: 'Simples',
+              valor: 'Fixo',
               valorPotencia: 0.0000,
-              valorEnergia: 0.0000,
-              atualizado: 2024-05-24
+              valorSimples: 0.0000,
+              valorVazio: 0.0000,
+              valorNaoVazio: 0.0000,
+              atualizacao: 2024/05/24
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -32,12 +35,15 @@ valor.get("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              idComercializador: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              comercializador: 'EDP',
+              potencia: '1.15',
+              tarifario: 'Simples',
+              valor: 'Fixo',
               valorPotencia: 0.0000,
-              valorEnergia: 0.0000,
-              atualizado: 2024-05-24
+              valorSimples: 0.0000,
+              valorVazio: 0.0000,
+              valorNaoVazio: 0.0000,
+              atualizacao: 2024/05/24
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -58,16 +64,21 @@ valor.post("/", async function (req: Request, res: Response) {
           description: 'Created',
           schema: {
               id: 1,
-              idComercializador: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              comercializador: 'EDP',
+              potencia: '1.15',
+              tarifario: 'Simples',
+              valor: 'Fixo',
               valorPotencia: 0.0000,
-              valorEnergia: 0.0000,
-              atualizado: 2024-05-24
+              valorSimples: 0.0000,
+              valorVazio: 0.0000,
+              valorNaoVazio: 0.0000,
+              atualizacao: 2024/05/24
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
-    const valor = await myDataSource.getRepository(Valor).create(req.body)
+    const hoje = new Date();
+    const valor = await myDataSource.getRepository(Valor)
+    valor.create(req.body, valor.atualizacao = hoje)
     const results = await myDataSource.getRepository(Valor).save(valor)
     return res.status(201).send(results)
 })
@@ -78,15 +89,19 @@ valor.put("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              idComercializador: 1,
-              idPotencia: 1,
-              idTarifario: 1,
+              comercializador: 'EDP',
+              potencia: '1.15',
+              tarifario: 'Simples',
+              valor: 'Fixo',
               valorPotencia: 0.0000,
-              valorEnergia: 0.0000,
-              atualizado: 2024-05-24
+              valorSimples: 0.0000,
+              valorVazio: 0.0000,
+              valorNaoVazio: 0.0000,
+              atualizacao: 2024/05/24
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
+    let hoje = new Date().toJSON().slice(0,10).replace(/-/g,'/');
     let valor: any
     if (!await myDataSource.getRepository(Valor).findOneBy({id: +req.params.id})){
         return res.status(404).send("id not found")
@@ -95,7 +110,7 @@ valor.put("/:id", async function (req: Request, res: Response) {
         valor = await myDataSource.getRepository(Valor).findOneBy({
             id: +req.params.id,
         })
-    myDataSource.getRepository(Valor).merge(valor, req.body)
+    myDataSource.getRepository(Valor).merge(valor, req.body, valor.atualizacao = hoje)
     const results = await myDataSource.getRepository(Valor).save(valor)
     return res.send(results)
 })

@@ -9,7 +9,7 @@ export class encrypt {
         return bcrypt.hashSync(password, 12);
     }
     static comparePassword(password: string, encryptedPassword: string) {
-        return bcrypt.compare(password, encryptedPassword);
+        return bcrypt.compareSync(password, encryptedPassword);
     }
 
     static generateToken(payload: payload) {

@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tar = void 0;
 var typeorm_1 = require("typeorm");
-var potencia_1 = require("./potencia");
-var tarifario_1 = require("./tarifario");
 var Tar = /** @class */ (function () {
     function Tar() {
     }
@@ -21,21 +19,29 @@ var Tar = /** @class */ (function () {
         __metadata("design:type", Number)
     ], Tar.prototype, "id", void 0);
     __decorate([
-        (0, typeorm_1.OneToMany)(function () { return potencia_1.Potencia; }, function (potencia) { return potencia.id; }),
-        __metadata("design:type", potencia_1.Potencia)
-    ], Tar.prototype, "idPotencia", void 0);
-    __decorate([
-        (0, typeorm_1.OneToMany)(function () { return tarifario_1.Tarifario; }, function (tarifario) { return tarifario.id; }),
-        __metadata("design:type", tarifario_1.Tarifario)
-    ], Tar.prototype, "idTarifario", void 0);
+        (0, typeorm_1.Column)("decimal", { precision: 4, scale: 2 }),
+        __metadata("design:type", Number)
+    ], Tar.prototype, "potencia", void 0);
     __decorate([
         (0, typeorm_1.Column)(),
+        __metadata("design:type", String)
+    ], Tar.prototype, "tarifario", void 0);
+    __decorate([
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
         __metadata("design:type", Number)
     ], Tar.prototype, "valorPotencia", void 0);
     __decorate([
-        (0, typeorm_1.Column)(),
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
         __metadata("design:type", Number)
-    ], Tar.prototype, "valorTarifario", void 0);
+    ], Tar.prototype, "simples", void 0);
+    __decorate([
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
+        __metadata("design:type", Number)
+    ], Tar.prototype, "vazio", void 0);
+    __decorate([
+        (0, typeorm_1.Column)("decimal", { precision: 5, scale: 4 }),
+        __metadata("design:type", Number)
+    ], Tar.prototype, "naoVazio", void 0);
     Tar = __decorate([
         (0, typeorm_1.Entity)()
     ], Tar);

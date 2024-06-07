@@ -1,34 +1,34 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, UpdateDateColumn } from "typeorm"
-import { Comercializador } from "./comercializador";
-import { Potencia } from "./potencia";
-import { Tarifario } from "./tarifario";
+import { Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
 @Entity()
 export class Valor {
     @PrimaryGeneratedColumn()
     id: number
 
-    @OneToMany(() => Comercializador, (comercializador) => comercializador.id)
-    idComercializador: Comercializador
+    @Column()
+    comercializador: string
 
-    @OneToMany(() => Potencia, (potencia) => potencia.id)
-    idPotencia: Potencia
-
-    @OneToMany(() => Tarifario, (tarifario) => tarifario.id)
-    idTarifario: Tarifario
+    @Column("decimal", {precision: 4, scale: 2})
+    potencia: number
 
     @Column()
+    tarifario: string
+
+    @Column()
+    valor: string
+
+    @Column("decimal", {precision: 5, scale: 4})
     valorPotencia: number
 
-    @Column()
-    valorEnergia: number
+    @Column("decimal", {precision: 5, scale: 4})
+    valorSimples: number
+
+    @Column("decimal", {precision: 5, scale: 4})
+    valorVazio: number
+
+    @Column("decimal", {precision: 5, scale: 4})
+    valorNaoVazio: number
 
     @UpdateDateColumn()
     atualizacao: Date
-
-
-
-
-
-
 }

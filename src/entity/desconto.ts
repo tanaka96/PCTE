@@ -6,8 +6,8 @@ export class Desconto {
     id: number
 
     @Column()
-    fatura_eletronica: number
+    tipo: string
 
     @Column()
-    debito_direto: number
+    percentagem: number
 }

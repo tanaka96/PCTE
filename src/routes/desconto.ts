@@ -13,8 +13,8 @@ desconto.get("/", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              fatura_eletronica: 1,
-              debito_direto: 1
+              tipo: 'Fatura Eletronica',
+              percentagem: 1
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -28,8 +28,8 @@ desconto.get("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              fatura_eletronica: 1,
-              debito_direto: 1
+              tipo: 'Fatura Eletronica',
+              percentagem: 1
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -50,8 +50,8 @@ desconto.post("/", async function (req: Request, res: Response) {
           description: 'Created',
           schema: {
               id: 1,
-              fatura_eletronica: 1,
-              debito_direto: 1
+              tipo: 'Fatura Eletronica',
+              percentagem: 1
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -66,8 +66,8 @@ desconto.put("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              fatura_eletronica: 1,
-              debito_direto: 1
+              tipo: 'Fatura Eletronica',
+              percentagem: 1
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
