@@ -36,5 +36,6 @@ app.post("/signup", utilizador_controller_1.UtilizadorController.signUp);
 app.post("/login", auth_controller_1.AuthController.login);
 app.post("/resultado", resultado_controller_1.ResultadoController.Resultado);
 app.listen(port, function () {
+    console.log(process.env.DB_HOST, parseInt(process.env.DB_PORT, 10), process.env.DB_USERNAME, process.env.DB_PASSWORD, process.env.DB_NAME);
     console.log('Running on 3000');
 });
