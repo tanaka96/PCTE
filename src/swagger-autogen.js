@@ -1,4 +1,5 @@
-const swaggerAutogen = require('swagger-autogen')();
+//const swaggerAutogen = require('swagger-autogen')();
+import swaggerAutogen from "swagger-autogen";
 
 const outputFile = './swagger-new.json';
 const endpointsFiles = ['./app.ts'];
