@@ -13,7 +13,7 @@ exports.myDataSource = new typeorm.DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: ["src/entity/*.js"],
-    timeout: 60000,
+    timeout: 120000,
     waitForConnections: true,
     //logging: true,
     //synchronize: true,
