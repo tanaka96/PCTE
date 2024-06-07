@@ -21,6 +21,7 @@ myDataSource
     })
 
 const app = express()
+const port = process.env.PORT
 
 app.use(express.json());
 
@@ -73,6 +74,6 @@ app.post("/resultado", ResultadoController.Resultado,
 );
 
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Running on 3000');
 });
