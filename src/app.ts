@@ -68,14 +68,33 @@ app.post("/login", AuthController.login,
 
 app.post("/resultado", ResultadoController.Resultado,
     // #swagger.tags = ['Resultado']
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              "result": [
+                    {
+                        "comercializador": "EDP",
+                        "precoTotal": "27.17",
+                        "preco100kW": "19.40",
+                        "precoResto": "0.23",
+                        "precoEnergia": "19.62",
+                        "precoPotencia": "4.32",
+                        "impostos": {
+                            "audiovisual": "3.02",
+                            "DGEG": "0.09",
+                            "IEC": "0.12",
+                            "IVA": "2.16"
+                        },
+                        "tar": "5.90",
+                        "desconto": "0.00",
+                        "valor": "Fixo"
+                    }]
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
 );
 
 
 app.listen(port, () => {
-    console.log(process.env.DB_HOST,
-        parseInt(process.env.DB_PORT, 10),
-        process.env.DB_USERNAME,
-        process.env.DB_PASSWORD,
-        process.env.DB_NAME,)
     console.log('Running on 3000');
 });
