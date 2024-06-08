@@ -45,7 +45,7 @@ const config = {
         name: 'Resultado',
         description: 'Endpoints',
     }],
-    host: 'https://pcte.onrender.com',
+    host: 'pcte.onrender.com',
     schemes: ['http', 'https'],
 };
 
