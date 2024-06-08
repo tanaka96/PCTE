@@ -231,7 +231,83 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "comercializador": {
+                        "type": "string",
+                        "example": "EDP"
+                      },
+                      "precoTotal": {
+                        "type": "string",
+                        "example": "27.17"
+                      },
+                      "preco100kW": {
+                        "type": "string",
+                        "example": "19.40"
+                      },
+                      "precoResto": {
+                        "type": "string",
+                        "example": "0.23"
+                      },
+                      "precoEnergia": {
+                        "type": "string",
+                        "example": "19.62"
+                      },
+                      "precoPotencia": {
+                        "type": "string",
+                        "example": "4.32"
+                      },
+                      "impostos": {
+                        "type": "object",
+                        "properties": {
+                          "audiovisual": {
+                            "type": "string",
+                            "example": "3.02"
+                          },
+                          "DGEG": {
+                            "type": "string",
+                            "example": "0.09"
+                          },
+                          "IEC": {
+                            "type": "string",
+                            "example": "0.12"
+                          },
+                          "IVA": {
+                            "type": "string",
+                            "example": "2.16"
+                          }
+                        }
+                      },
+                      "tar": {
+                        "type": "string",
+                        "example": "5.90"
+                      },
+                      "desconto": {
+                        "type": "string",
+                        "example": "0.00"
+                      },
+                      "valor": {
+                        "type": "string",
+                        "example": "Fixo"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
