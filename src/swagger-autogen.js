@@ -46,7 +46,7 @@ const config = {
         description: 'Endpoints',
     }],
     host: 'pcte.onrender.com',
-    schemes: ['http', 'https'],
+    schemes: 'https',
 };
 
 swaggerAutogen(outputFile, endpointsFiles, config)
