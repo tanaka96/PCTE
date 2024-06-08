@@ -1,4 +1,3 @@
-//import { DataSource } from "typeorm"
 const typeorm = require("typeorm");
 const dotenv = require('dotenv')
 
@@ -15,7 +14,4 @@ export const myDataSource = new typeorm.DataSource({
     connectTimeout: 120000,
     acquireTimeout: 120000,
     waitForConnections: true,
-
-    //logging: true,
-    //synchronize: true,
 })

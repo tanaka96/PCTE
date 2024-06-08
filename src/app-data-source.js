@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.myDataSource = void 0;
-//import { DataSource } from "typeorm"
 var typeorm = require("typeorm");
 var dotenv = require('dotenv');
 dotenv.config();
@@ -16,6 +15,4 @@ exports.myDataSource = new typeorm.DataSource({
     connectTimeout: 120000,
     acquireTimeout: 120000,
     waitForConnections: true,
-    //logging: true,
-    //synchronize: true,
 });
