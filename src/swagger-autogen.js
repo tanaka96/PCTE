@@ -45,7 +45,7 @@ const config = {
         name: 'Resultado',
         description: 'Endpoints',
     }],
-    host: 'localhost:3000/api',
+    host: 'https://pcte.onrender.com',
     schemes: ['http', 'https'],
 };
 
