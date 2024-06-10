@@ -51,7 +51,7 @@ var Valor = /** @class */ (function () {
         __metadata("design:type", Number)
     ], Valor.prototype, "valorNaoVazio", void 0);
     __decorate([
-        (0, typeorm_1.UpdateDateColumn)(),
+        (0, typeorm_1.UpdateDateColumn)({ type: 'date', default: '(CURRENT_DATE)', onUpdate: 'CURRENT_DATE' }),
         __metadata("design:type", Date)
     ], Valor.prototype, "atualizacao", void 0);
     Valor = __decorate([

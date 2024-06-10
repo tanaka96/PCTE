@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm"
 
 @Entity()
 export class Valor {
@@ -29,6 +29,6 @@ export class Valor {
     @Column("decimal", {precision: 5, scale: 4})
     valorNaoVazio: number
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({type: 'date', default: '(CURRENT_DATE)', onUpdate: 'CURRENT_DATE'})
     atualizacao: Date
 }

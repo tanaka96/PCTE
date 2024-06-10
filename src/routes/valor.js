@@ -80,15 +80,15 @@ valor.post("/", function (req, res) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    hoje = new Date();
-                    return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor)];
+                    hoje = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+                    return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor).create(req.body)];
                 case 1:
                     valor = _a.sent();
-                    valor.create(req.body, valor.atualizacao = hoje);
+                    valor.atualizacao = hoje;
                     return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(valor_1.Valor).save(valor)];
                 case 2:
                     results = _a.sent();
-                    return [2 /*return*/, res.status(201).send(results)];
+                    return [2 /*return*/, res.status(201).json(results)];
             }
         });
     });

@@ -22,7 +22,6 @@ const port = process.env.PORT
 
 app.use(express.json());
 
-
 app.use('/comercializador', require('./routes/comercializador.ts'))
 
 app.use('/desconto', require('./routes/desconto.ts'))

@@ -76,11 +76,11 @@ valor.post("/", async function (req: Request, res: Response) {
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
-    const hoje = new Date();
-    const valor = await myDataSource.getRepository(Valor)
-    valor.create(req.body, valor.atualizacao = hoje)
+    const hoje = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+    const valor = await myDataSource.getRepository(Valor).create(req.body)
+    valor.atualizacao = hoje
     const results = await myDataSource.getRepository(Valor).save(valor)
-    return res.status(201).send(results)
+    return res.status(201).json(results)
 })
 
 valor.put("/:id", async function (req: Request, res: Response) {
