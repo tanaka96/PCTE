@@ -3,6 +3,8 @@ export class ResultadoResponce{
     precoTotal: number;
     preco100kW: number;
     precoResto: number;
+    precoVazio: number;
+    precoNaoVazio: number;
     precoEnergia: number;
     precoPotencia: number;
     impostos: { audiovisual: number, DGEG: number, IEC: number, IVA: number };

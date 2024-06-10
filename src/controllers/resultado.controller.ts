@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
 import { myDataSource } from "../app-data-source";
-import { Comercializador } from "../entity/comercializador";
-import { Desconto } from "../entity/desconto";
-import { Potencia } from "../entity/potencia";
 import { Tar } from "../entity/tar";
-import { Tarifario } from "../entity/tarifario";
 import { Taxa } from "../entity/taxa";
 import { Valor } from "../entity/valor";
 import {ResultadoResponce} from "../dto/resultado.dto";
@@ -18,7 +14,6 @@ export class ResultadoController {
             }
 
             const valorRep = myDataSource.getRepository(Valor);
-            const valores = await valorRep.find({where: { potencia: potencia, tarifario: tarifa  }});
             const max = await valorRep.createQueryBuilder().select("MAX(id)", "max").getRawOne();
             const taxaRep = myDataSource.getRepository(Taxa);
             const tarRep = myDataSource.getRepository(Tar);
@@ -42,13 +37,15 @@ export class ResultadoController {
             let tar: number = 0
             let desconto: number = 0
             let valor: string
+            let precoVazio: number = 0
+            let precoNaoVazio: number = 0
 
             var i = 1;
             const resultDataSent = []
 
             if (tarifa == "Simples"){
-                if (potencia <= "6.90"){
-                    if (potencia == "1.15" || potencia == "2.30" || potencia == "3.45") {
+                if (potencia < "10.35"){
+                    if (potencia <= "3.45") {
                         do {
                             const valPot = await valorRep.findOneBy({id: i})
                             valor = valPot.valor
@@ -119,9 +116,319 @@ export class ResultadoController {
                         return res.status(200).json({result})
 
 
+                    } else {
+                        do {
+                            const valPot = await valorRep.findOneBy({id: i})
+                            valor = valPot.valor
+                            const tarPot = await tarRep.findOneBy({potencia: potencia})
+                            const precoPot: number = valPot.valorPotencia
+                            const gasto: number = valPot.valorSimples
+                            if (potencia != valPot.potencia){
+                                i++
+                            } else if (contagem <= 100) {
+                                cemkW = contagem*gasto*(1+(iva6F/100))
+                                precoEnergia = cemkW
+                                precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                                audio = audiovisual.valor*(1+(iva6F/100))
+                                dgegTotal = dgeg.valor*(1+(iva23F/100))
+                                iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                                iva = (contagem*gasto*(iva6F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                    (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                                tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
+                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                resultDataSent[i-1] = new ResultadoResponce()
+                                resultDataSent[i-1].comercializador = valPot.comercializador
+                                resultDataSent[i-1].precoTotal = total.toFixed(2)
+                                resultDataSent[i-1].preco100kW = cemkW.toFixed(2)
+                                resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                                resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                                resultDataSent[i-1].impostos = {
+                                    audiovisual: audio.toFixed(2),
+                                    DGEG: dgegTotal.toFixed(2),
+                                    IEC: iecTotal.toFixed(2),
+                                    IVA: iva.toFixed(2)}
+                                resultDataSent[i-1].tar = tar.toFixed(2)
+                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].valor = valor
+                                i++
+                            } else if (contagem > 100){
+                                cemkW = 100*gasto*(1+(iva6F/100))
+                                resto = (contagem-100)*gasto*(1+(iva23F/100))
+                                precoEnergia = cemkW+resto
+                                precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                                audio = audiovisual.valor*(1+(iva6F/100))
+                                dgegTotal = dgeg.valor*(1+(iva23F/100))
+                                iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                                iva = (100*gasto*(iva6F/100))+((contagem-100)*gasto*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                    (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                                tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
+                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                resultDataSent[i-1] = new ResultadoResponce()
+                                resultDataSent[i-1].comercializador = valPot.comercializador
+                                resultDataSent[i-1].precoTotal = total.toFixed(2)
+                                resultDataSent[i-1].preco100kW = cemkW.toFixed(2)
+                                resultDataSent[i-1].precoResto = resto.toFixed(2)
+                                resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                                resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                                resultDataSent[i-1].impostos = {
+                                    audiovisual: audio.toFixed(2),
+                                    DGEG: dgegTotal.toFixed(2),
+                                    IEC: iecTotal.toFixed(2),
+                                    IVA: iva.toFixed(2)}
+                                resultDataSent[i-1].tar = tar.toFixed(2)
+                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].valor = valor
+                                i++
+                            }
+
+                        } while (i <= max.max)
+
+                        const result = resultDataSent.filter(element => element !== null)
+                        return res.status(200).json({result})
                     }
+                } else {
+                    do {
+                        const valPot = await valorRep.findOneBy({id: i})
+                        valor = valPot.valor
+                        const tarPot = await tarRep.findOneBy({potencia: potencia})
+                        const precoPot: number = valPot.valorPotencia
+                        const gasto: number = valPot.valorSimples
+                        if (potencia != valPot.potencia){
+                            i++
+                        } else {
+                            precoEnergia = contagem*gasto*(1+(iva23F/100))
+                            precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                            audio = audiovisual.valor*(1+(iva6F/100))
+                            dgegTotal = dgeg.valor*(1+(iva23F/100))
+                            iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                            iva = (contagem*gasto*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                            tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
+                            total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                            resultDataSent[i-1] = new ResultadoResponce()
+                            resultDataSent[i-1].comercializador = valPot.comercializador
+                            resultDataSent[i-1].precoTotal = total.toFixed(2)
+                            resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                            resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                            resultDataSent[i-1].impostos = {
+                                audiovisual: audio.toFixed(2),
+                                DGEG: dgegTotal.toFixed(2),
+                                IEC: iecTotal.toFixed(2),
+                                IVA: iva.toFixed(2)}
+                            resultDataSent[i-1].tar = tar.toFixed(2)
+                            resultDataSent[i-1].desconto = desconto.toFixed(2)
+                            resultDataSent[i-1].valor = valor
+                            i++
+                        }
+
+                    } while (i <= max.max)
+
+                    const result = resultDataSent.filter(element => element !== null)
+                    return res.status(200).json({result})
                 }
 
+            } else {
+                if (potencia < "10.35"){
+                    if (potencia <= "3.45") {
+                        do {
+                            const valPot = await valorRep.findOneBy({id: i})
+                            valor = valPot.valor
+                            const tarPot = await tarRep.findOneBy({potencia: potencia})
+                            const precoPot: number = valPot.valorPotencia
+                            const valorVazio: number = valPot.valorVazio
+                            const valorNaoVazio: number = valPot.valorNaoVazio
+                            if (potencia != valPot.potencia){
+                                i++
+                            } else if (contagem <= 100) {
+                                precoVazio = vazio*valorVazio*(1+(iva6F/100))
+                                precoNaoVazio = (ponta+cheio)*valorNaoVazio*(1+(iva6F/100))
+                                precoEnergia = precoVazio+precoNaoVazio
+                                precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                                audio = audiovisual.valor*(1+(iva6F/100))
+                                dgegTotal = dgeg.valor*(1+(iva23F/100))
+                                iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                                iva = (vazio*valorVazio*(iva6F/100))+((ponta+cheio)*valorNaoVazio*(iva6F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                    (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                                tar = ((tarPot.valorPotencia*dias)*(1+(iva6F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
+                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                resultDataSent[i-1] = new ResultadoResponce()
+                                resultDataSent[i-1].comercializador = valPot.comercializador
+                                resultDataSent[i-1].precoVazio = precoVazio.toFixed(2)
+                                resultDataSent[i-1].precoNaoVazio = precoNaoVazio.toFixed(2)
+                                resultDataSent[i-1].precoTotal = total.toFixed(2)
+                                resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                                resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                                resultDataSent[i-1].impostos = {
+                                    audiovisual: audio.toFixed(2),
+                                    DGEG: dgegTotal.toFixed(2),
+                                    IEC: iecTotal.toFixed(2),
+                                    IVA: iva.toFixed(2)}
+                                resultDataSent[i-1].tar = tar.toFixed(2)
+                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].valor = valor
+                                i++
+                            } else if (contagem > 100){
+                                cemkW = (((vazio*100)/contagem)*valorVazio*(1+(iva6F/100)))+((((ponta+cheio)*100)/contagem)*valorNaoVazio*(1+(iva6F/100)))
+                                resto = ((vazio-((vazio*100)/contagem))*valorVazio*(1+(iva23F/100)))+(((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(1+(iva23F/100)))
+                                precoVazio = (((vazio*100)/contagem)*valorVazio*(1+(iva6F/100)))+((vazio-((vazio*100)/contagem))*valorVazio*(1+(iva23F/100)))
+                                precoNaoVazio = ((((ponta+cheio)*100)/contagem)*valorNaoVazio*(1+(iva6F/100)))+(((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(1+(iva23F/100)))
+                                precoEnergia = cemkW+resto
+                                precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                                audio = audiovisual.valor*(1+(iva6F/100))
+                                dgegTotal = dgeg.valor*(1+(iva23F/100))
+                                iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                                iva = ((((vazio*100)/contagem)*valorVazio*(iva6F/100)))+((((ponta+cheio)*100)/contagem)*valorNaoVazio*(iva6F/100))+((vazio-((vazio*100)/contagem))*valorVazio*(iva23F/100)) +
+                                    (((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                    (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                                tar = ((tarPot.valorPotencia*dias)*(1+(iva6F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
+                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                resultDataSent[i-1] = new ResultadoResponce()
+                                resultDataSent[i-1].comercializador = valPot.comercializador
+                                resultDataSent[i-1].precoTotal = total.toFixed(2)
+                                resultDataSent[i-1].preco100kW = cemkW.toFixed(2)
+                                resultDataSent[i-1].precoResto = resto.toFixed(2)
+                                resultDataSent[i-1].precoVazio = precoVazio.toFixed(2)
+                                resultDataSent[i-1].precoNaoVazio = precoNaoVazio.toFixed(2)
+                                resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                                resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                                resultDataSent[i-1].impostos = {
+                                    audiovisual: audio.toFixed(2),
+                                    DGEG: dgegTotal.toFixed(2),
+                                    IEC: iecTotal.toFixed(2),
+                                    IVA: iva.toFixed(2)}
+                                resultDataSent[i-1].tar = tar.toFixed(2)
+                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].valor = valor
+                                i++
+                            }
+
+                        } while (i <= max.max)
+
+                        const result = resultDataSent.filter(element => element !== null)
+                        return res.status(200).json({result})
+
+
+                    } else {
+                        do {
+                            const valPot = await valorRep.findOneBy({id: i})
+                            valor = valPot.valor
+                            const tarPot = await tarRep.findOneBy({potencia: potencia})
+                            const precoPot: number = valPot.valorPotencia
+                            const valorVazio: number = valPot.valorVazio
+                            const valorNaoVazio: number = valPot.valorNaoVazio
+                            if (potencia != valPot.potencia){
+                                i++
+                            } else if (contagem <= 100) {
+                                precoVazio = vazio*valorVazio*(1+(iva6F/100))
+                                precoNaoVazio = (ponta+cheio)*valorNaoVazio*(1+(iva6F/100))
+                                precoEnergia = precoVazio+precoNaoVazio
+                                precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                                audio = audiovisual.valor*(1+(iva6F/100))
+                                dgegTotal = dgeg.valor*(1+(iva23F/100))
+                                iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                                iva = (vazio*valorVazio*(iva6F/100))+((ponta+cheio)*valorNaoVazio*(iva6F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                    (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                                tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
+                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                resultDataSent[i-1] = new ResultadoResponce()
+                                resultDataSent[i-1].comercializador = valPot.comercializador
+                                resultDataSent[i-1].precoVazio = precoVazio.toFixed(2)
+                                resultDataSent[i-1].precoNaoVazio = precoNaoVazio.toFixed(2)
+                                resultDataSent[i-1].precoTotal = total.toFixed(2)
+                                resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                                resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                                resultDataSent[i-1].impostos = {
+                                    audiovisual: audio.toFixed(2),
+                                    DGEG: dgegTotal.toFixed(2),
+                                    IEC: iecTotal.toFixed(2),
+                                    IVA: iva.toFixed(2)}
+                                resultDataSent[i-1].tar = tar.toFixed(2)
+                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].valor = valor
+                                i++
+                            } else if (contagem > 100){
+                                cemkW = (((vazio*100)/contagem)*valorVazio*(1+(iva6F/100)))+((((ponta+cheio)*100)/contagem)*valorNaoVazio*(1+(iva6F/100)))
+                                resto = ((vazio-((vazio*100)/contagem))*valorVazio*(1+(iva23F/100)))+(((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(1+(iva23F/100)))
+                                precoVazio = (((vazio*100)/contagem)*valorVazio*(1+(iva6F/100)))+((vazio-((vazio*100)/contagem))*valorVazio*(1+(iva23F/100)))
+                                precoNaoVazio = ((((ponta+cheio)*100)/contagem)*valorNaoVazio*(1+(iva6F/100)))+(((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(1+(iva23F/100)))
+                                precoEnergia = cemkW+resto
+                                precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                                audio = audiovisual.valor*(1+(iva6F/100))
+                                dgegTotal = dgeg.valor*(1+(iva23F/100))
+                                iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                                iva = ((((vazio*100)/contagem)*valorVazio*(iva6F/100)))+((((ponta+cheio)*100)/contagem)*valorNaoVazio*(iva6F/100))+((vazio-((vazio*100)/contagem))*valorVazio*(iva23F/100)) +
+                                    (((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                    (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                                tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
+                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                resultDataSent[i-1] = new ResultadoResponce()
+                                resultDataSent[i-1].comercializador = valPot.comercializador
+                                resultDataSent[i-1].precoTotal = total.toFixed(2)
+                                resultDataSent[i-1].preco100kW = cemkW.toFixed(2)
+                                resultDataSent[i-1].precoResto = resto.toFixed(2)
+                                resultDataSent[i-1].precoVazio = precoVazio.toFixed(2)
+                                resultDataSent[i-1].precoNaoVazio = precoNaoVazio.toFixed(2)
+                                resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                                resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                                resultDataSent[i-1].impostos = {
+                                    audiovisual: audio.toFixed(2),
+                                    DGEG: dgegTotal.toFixed(2),
+                                    IEC: iecTotal.toFixed(2),
+                                    IVA: iva.toFixed(2)}
+                                resultDataSent[i-1].tar = tar.toFixed(2)
+                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].valor = valor
+                                i++
+                            }
+
+                        } while (i <= max.max)
+
+                        const result = resultDataSent.filter(element => element !== null)
+                        return res.status(200).json({result})
+
+
+                    }
+                } else {
+                    do {
+                        const valPot = await valorRep.findOneBy({id: i})
+                        valor = valPot.valor
+                        const tarPot = await tarRep.findOneBy({potencia: potencia})
+                        const precoPot: number = valPot.valorPotencia
+                        const valorVazio: number = valPot.valorVazio
+                        const valorNaoVazio: number = valPot.valorNaoVazio
+                        if (potencia != valPot.potencia){
+                            i++
+                        } else {
+                            precoEnergia = ((vazio*valorVazio)+((ponta+cheio)*valorNaoVazio))*(1+(iva23F/100))
+                            precoPotencia = (precoPot*dias)*(1+(iva23F/100))
+                            audio = audiovisual.valor*(1+(iva6F/100))
+                            dgegTotal = dgeg.valor*(1+(iva23F/100))
+                            iecTotal = iec.valor*contagem*(1+(iva23F/100))
+                            iva = (((vazio*valorVazio)+((ponta+cheio)*valorNaoVazio))*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
+                                (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
+                            tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
+                            total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                            resultDataSent[i-1] = new ResultadoResponce()
+                            resultDataSent[i-1].comercializador = valPot.comercializador
+                            resultDataSent[i-1].precoTotal = total.toFixed(2)
+                            resultDataSent[i-1].precoEnergia = precoEnergia.toFixed(2)
+                            resultDataSent[i-1].precoPotencia = precoPotencia.toFixed(2)
+                            resultDataSent[i-1].impostos = {
+                                audiovisual: audio.toFixed(2),
+                                DGEG: dgegTotal.toFixed(2),
+                                IEC: iecTotal.toFixed(2),
+                                IVA: iva.toFixed(2)}
+                            resultDataSent[i-1].tar = tar.toFixed(2)
+                            resultDataSent[i-1].desconto = desconto.toFixed(2)
+                            resultDataSent[i-1].valor = valor
+                            i++
+                        }
+
+                    } while (i <= max.max)
+
+                    const result = resultDataSent.filter(element => element !== null)
+                    return res.status(200).json({result})
+                }
             }
 
         } catch (error) {
