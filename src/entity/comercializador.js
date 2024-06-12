@@ -22,6 +22,10 @@ var Comercializador = /** @class */ (function () {
         (0, typeorm_1.Column)(),
         __metadata("design:type", String)
     ], Comercializador.prototype, "empresa", void 0);
+    __decorate([
+        (0, typeorm_1.Column)(),
+        __metadata("design:type", String)
+    ], Comercializador.prototype, "logo", void 0);
     Comercializador = __decorate([
         (0, typeorm_1.Entity)()
     ], Comercializador);

@@ -2,6 +2,8 @@ import * as express from "express"
 import {Request, Response} from "express"
 import {Comercializador} from "../entity/comercializador";
 import {myDataSource} from "../app-data-source";
+import { upload } from "../controllers/logo.controller"
+import * as multer from "multer"
 
 
 const comercializador = express()
@@ -99,6 +101,22 @@ comercializador.delete("/:id", async function (req: Request, res: Response) {
     else
         results = await myDataSource.getRepository(Comercializador).delete(req.params.id)
         return res.send(results)
+})
+
+comercializador.put("/upload/:id", upload.single("logo"), async (req, res) => {
+    let comercializador: any
+    if (!await myDataSource.getRepository(Comercializador).findOneBy({id: +req.params.id})) {
+        return res.status(404).send("Comercializador não encontrado")
+    } else {
+        comercializador = await myDataSource.getRepository(Comercializador).findOneBy({
+            id: +req.params.id,
+        })
+        const ficheiro = req.file.filename
+        myDataSource.getRepository(Comercializador).merge(comercializador, req.body)
+        comercializador.logo = ficheiro
+        const results = await myDataSource.getRepository(Comercializador).save(comercializador)
+        return res.send(results)
+    }
 })
 
 module.exports = comercializador;

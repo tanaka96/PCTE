@@ -75,7 +75,7 @@ var UtilizadorController = /** @class */ (function () {
                         _b.sent();
                         _b.label = 6;
                     case 6:
-                        userDataSent = new user_dto_1.UserResponce();
+                        userDataSent = new user_dto_1.UserResponse();
                         userDataSent.name = utilizador.first_name;
                         userDataSent.email = utilizador.email;
                         userDataSent.role = utilizador.admin;

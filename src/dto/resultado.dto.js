@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResultadoResponce = void 0;
-var ResultadoResponce = /** @class */ (function () {
-    function ResultadoResponce() {
+exports.ResultadoResponse = void 0;
+var ResultadoResponse = /** @class */ (function () {
+    function ResultadoResponse() {
     }
-    return ResultadoResponce;
+    return ResultadoResponse;
 }());
-exports.ResultadoResponce = ResultadoResponce;
+exports.ResultadoResponse = ResultadoResponse;

@@ -1,4 +1,4 @@
-export class ResultadoResponce{
+export class ResultadoResponse{
     comercializador: string;
     precoTotal: number;
     preco100kW: number;

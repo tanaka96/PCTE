@@ -7,4 +7,7 @@ export class Comercializador {
 
     @Column()
     empresa: string
+
+    @Column()
+    logo: string
 }

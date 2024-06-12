@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var comercializador_1 = require("../entity/comercializador");
 var app_data_source_1 = require("../app-data-source");
+var logo_controller_1 = require("../controllers/logo.controller");
 var comercializador = express();
 comercializador.use(express.json());
 comercializador.get("/", function (req, res) {
@@ -136,4 +137,27 @@ comercializador.delete("/:id", function (req, res) {
         });
     });
 });
+comercializador.put("/upload/:id", logo_controller_1.upload.single("logo"), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var comercializador, ficheiro, results;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({ id: +req.params.id })];
+            case 1:
+                if (!!(_a.sent())) return [3 /*break*/, 2];
+                return [2 /*return*/, res.status(404).send("Comercializador não encontrado")];
+            case 2: return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).findOneBy({
+                    id: +req.params.id,
+                })];
+            case 3:
+                comercializador = _a.sent();
+                ficheiro = req.file.filename;
+                app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).merge(comercializador, req.body);
+                comercializador.logo = ficheiro;
+                return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).save(comercializador)];
+            case 4:
+                results = _a.sent();
+                return [2 /*return*/, res.send(results)];
+        }
+    });
+}); });
 module.exports = comercializador;

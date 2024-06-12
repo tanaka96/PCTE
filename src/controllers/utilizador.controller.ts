@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { myDataSource } from "../app-data-source";
 import { Utilizador } from "../entity/utilizador";
 import { encrypt } from "../helpers/encrypt";
-import { UserResponce } from "../dto/user.dto";
+import { UserResponse } from "../dto/user.dto";
 import * as cache from "memory-cache";
 
 export class UtilizadorController {
@@ -25,7 +25,7 @@ export class UtilizadorController {
             await utilizadorRep.save(utilizador);
         }
 
-        const userDataSent = new UserResponce();
+        const userDataSent = new UserResponse();
         userDataSent.name = utilizador.first_name;
         userDataSent.email = utilizador.email;
         userDataSent.role = utilizador.admin;

@@ -123,7 +123,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].preco100kW = cemkW.toFixed(2);
@@ -152,7 +152,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].preco100kW = cemkW.toFixed(2);
@@ -200,7 +200,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].preco100kW = cemkW.toFixed(2);
@@ -229,7 +229,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].preco100kW = cemkW.toFixed(2);
@@ -277,7 +277,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].precoEnergia = precoEnergia.toFixed(2);
@@ -330,7 +330,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoVazio = precoVazio.toFixed(2);
                             resultDataSent[i - 1].precoNaoVazio = precoNaoVazio.toFixed(2);
@@ -363,7 +363,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].preco100kW = cemkW.toFixed(2);
@@ -415,7 +415,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoVazio = precoVazio.toFixed(2);
                             resultDataSent[i - 1].precoNaoVazio = precoNaoVazio.toFixed(2);
@@ -448,7 +448,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].preco100kW = cemkW.toFixed(2);
@@ -499,7 +499,7 @@ var ResultadoController = /** @class */ (function () {
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
                             total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
-                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponce();
+                            resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
                             resultDataSent[i - 1].precoEnergia = precoEnergia.toFixed(2);
