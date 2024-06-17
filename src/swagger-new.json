@@ -492,7 +492,7 @@
       }
     },
     "/comercializador/upload/{id}": {
-      "post": {
+      "put": {
         "description": "",
         "parameters": [
           {

@@ -150,7 +150,7 @@ comercializador.put("/upload/:id", logo_controller_1.upload.single("logo"), func
                 })];
             case 3:
                 comercializador = _a.sent();
-                ficheiro = req.file.filename;
+                ficheiro = req.file.path;
                 app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).merge(comercializador, req.body);
                 comercializador.logo = ficheiro;
                 return [4 /*yield*/, app_data_source_1.myDataSource.getRepository(comercializador_1.Comercializador).save(comercializador)];

@@ -111,7 +111,7 @@ comercializador.put("/upload/:id", upload.single("logo"), async (req, res) => {
         comercializador = await myDataSource.getRepository(Comercializador).findOneBy({
             id: +req.params.id,
         })
-        const ficheiro = req.file.filename
+        const ficheiro = req.file.path
         myDataSource.getRepository(Comercializador).merge(comercializador, req.body)
         comercializador.logo = ficheiro
         const results = await myDataSource.getRepository(Comercializador).save(comercializador)
