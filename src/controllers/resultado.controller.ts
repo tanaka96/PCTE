@@ -4,11 +4,12 @@ import { Tar } from "../entity/tar";
 import { Taxa } from "../entity/taxa";
 import { Valor } from "../entity/valor";
 import {ResultadoResponse} from "../dto/resultado.dto";
+import {Desconto} from "../entity/desconto";
 
 export class ResultadoController {
     static async Resultado(req: Request, res: Response) {
         try {
-            const { potencia, tarifa, dias, vazio, ponta, cheio } = req.body;
+            const { potencia, tarifa, dias, vazio, ponta, cheio, desconto } = req.body;
             if (!potencia || !tarifa || !dias || ! vazio || !ponta || !cheio) {
                 return res.status(500).json({message: "Campos obrigatórios!"})
             }
@@ -17,14 +18,17 @@ export class ResultadoController {
             const max = await valorRep.createQueryBuilder().select("MAX(id)", "max").getRawOne();
             const taxaRep = myDataSource.getRepository(Taxa);
             const tarRep = myDataSource.getRepository(Tar);
+            const descRep = myDataSource.getRepository(Desconto);
             const audiovisual = await taxaRep.findOne({where: {nome: "Audiovisual" }})
             const dgeg = await taxaRep.findOne({where: {nome: "DGEG"}})
             const iec = await taxaRep.findOne({where: {nome: "Especial/kWh"}})
             const iva6 = await taxaRep.findOne({where: {nome: "IVA", valor: "6"}})
             const iva23 = await taxaRep.findOne({where: {nome: "IVA", valor: "23"}})
+            const desc = await descRep.findOne({where: {tipo: desconto}})
             const iva6F: number = iva6.valor
             const iva23F: number = iva23.valor
             const contagem = vazio + ponta + cheio
+            let subtotal: number = 0
             let total: number = 0
             let cemkW: number = 0
             let resto: number = 0
@@ -35,7 +39,7 @@ export class ResultadoController {
             let iecTotal:number=0
             let iva:number = 0
             let tar: number = 0
-            let desconto: number = 0
+            let descontoT: number = 0
             let valor: string
             let precoVazio: number = 0
             let precoNaoVazio: number = 0
@@ -64,7 +68,13 @@ export class ResultadoController {
                                 iva = (contagem*gasto*(iva6F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva6F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoTotal = total.toFixed(2)
@@ -91,7 +101,13 @@ export class ResultadoController {
                                 iva = (100*gasto*(iva6F/100))+((contagem-100)*gasto*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva6F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoTotal = total.toFixed(2)
@@ -135,7 +151,13 @@ export class ResultadoController {
                                 iva = (contagem*gasto*(iva6F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoTotal = total.toFixed(2)
@@ -162,7 +184,13 @@ export class ResultadoController {
                                 iva = (100*gasto*(iva6F/100))+((contagem-100)*gasto*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoTotal = total.toFixed(2)
@@ -204,7 +232,13 @@ export class ResultadoController {
                             iva = (contagem*gasto*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                 (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                             tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+((tarPot.simples*contagem)*(1+(iva23F/100)))
-                            total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                            subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                            if (desc.percentagem == 0){
+                                total=subtotal
+                            } else {
+                                descontoT = subtotal*(desc.percentagem/100)
+                                total = subtotal-descontoT
+                            }
                             resultDataSent[i-1] = new ResultadoResponse()
                             resultDataSent[i-1].comercializador = valPot.comercializador
                             resultDataSent[i-1].precoTotal = total.toFixed(2)
@@ -250,7 +284,13 @@ export class ResultadoController {
                                 iva = (vazio*valorVazio*(iva6F/100))+((ponta+cheio)*valorNaoVazio*(iva6F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva6F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoVazio = precoVazio.toFixed(2)
@@ -281,7 +321,13 @@ export class ResultadoController {
                                     (((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva6F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoTotal = total.toFixed(2)
@@ -329,7 +375,13 @@ export class ResultadoController {
                                 iva = (vazio*valorVazio*(iva6F/100))+((ponta+cheio)*valorNaoVazio*(iva6F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoVazio = precoVazio.toFixed(2)
@@ -360,7 +412,13 @@ export class ResultadoController {
                                     (((ponta+cheio)-(((ponta+cheio)*100)/contagem))*valorNaoVazio*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                     (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                                 tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
-                                total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                                if (desc.percentagem == 0){
+                                    total=subtotal
+                                } else {
+                                    descontoT = subtotal*(desc.percentagem/100)
+                                    total = subtotal-descontoT
+                                }
                                 resultDataSent[i-1] = new ResultadoResponse()
                                 resultDataSent[i-1].comercializador = valPot.comercializador
                                 resultDataSent[i-1].precoTotal = total.toFixed(2)
@@ -407,7 +465,13 @@ export class ResultadoController {
                             iva = (((vazio*valorVazio)+((ponta+cheio)*valorNaoVazio))*(iva23F/100))+((precoPot*dias)*(iva23F/100))+(audiovisual.valor*(iva6F/100))+
                                 (dgeg.valor*(iva23F/100))+(iec.valor*contagem*(iva23F/100))
                             tar = ((tarPot.valorPotencia*dias)*(1+(iva23F/100)))+(((tarPot.vazio*vazio)+(tarPot.naoVazio*(ponta+cheio)))*(1+(iva23F/100)))
-                            total = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                            subtotal = precoEnergia+precoPotencia+audio+dgegTotal+iecTotal
+                            if (desc.percentagem == 0){
+                                total=subtotal
+                            } else {
+                                descontoT = subtotal*(desc.percentagem/100)
+                                total = subtotal-descontoT
+                            }
                             resultDataSent[i-1] = new ResultadoResponse()
                             resultDataSent[i-1].comercializador = valPot.comercializador
                             resultDataSent[i-1].precoTotal = total.toFixed(2)

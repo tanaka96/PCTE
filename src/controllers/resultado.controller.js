@@ -42,17 +42,18 @@ var tar_1 = require("../entity/tar");
 var taxa_1 = require("../entity/taxa");
 var valor_1 = require("../entity/valor");
 var resultado_dto_1 = require("../dto/resultado.dto");
+var desconto_1 = require("../entity/desconto");
 var ResultadoController = /** @class */ (function () {
     function ResultadoController() {
     }
     ResultadoController.Resultado = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, potencia, tarifa, dias, vazio, ponta, cheio, valorRep, max, taxaRep, tarRep, audiovisual, dgeg, iec, iva6, iva23, iva6F, iva23F, contagem, total, cemkW, resto, precoEnergia, precoPotencia, audio, dgegTotal, iecTotal, iva, tar, desconto, valor, precoVazio, precoNaoVazio, i, resultDataSent, valPot, tarPot, precoPot, gasto, result, valPot, tarPot, precoPot, gasto, result, valPot, tarPot, precoPot, gasto, result, valPot, tarPot, precoPot, valorVazio, valorNaoVazio, result, valPot, tarPot, precoPot, valorVazio, valorNaoVazio, result, valPot, tarPot, precoPot, valorVazio, valorNaoVazio, result, error_1;
+            var _a, potencia, tarifa, dias, vazio, ponta, cheio, desconto, valorRep, max, taxaRep, tarRep, descRep, audiovisual, dgeg, iec, iva6, iva23, desc, iva6F, iva23F, contagem, subtotal, total, cemkW, resto, precoEnergia, precoPotencia, audio, dgegTotal, iecTotal, iva, tar, descontoT, valor, precoVazio, precoNaoVazio, i, resultDataSent, valPot, tarPot, precoPot, gasto, result, valPot, tarPot, precoPot, gasto, result, valPot, tarPot, precoPot, gasto, result, valPot, tarPot, precoPot, valorVazio, valorNaoVazio, result, valPot, tarPot, precoPot, valorVazio, valorNaoVazio, result, valPot, tarPot, precoPot, valorVazio, valorNaoVazio, result, error_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _b.trys.push([0, 42, , 43]);
-                        _a = req.body, potencia = _a.potencia, tarifa = _a.tarifa, dias = _a.dias, vazio = _a.vazio, ponta = _a.ponta, cheio = _a.cheio;
+                        _b.trys.push([0, 43, , 44]);
+                        _a = req.body, potencia = _a.potencia, tarifa = _a.tarifa, dias = _a.dias, vazio = _a.vazio, ponta = _a.ponta, cheio = _a.cheio, desconto = _a.desconto;
                         if (!potencia || !tarifa || !dias || !vazio || !ponta || !cheio) {
                             return [2 /*return*/, res.status(500).json({ message: "Campos obrigatórios!" })];
                         }
@@ -62,6 +63,7 @@ var ResultadoController = /** @class */ (function () {
                         max = _b.sent();
                         taxaRep = app_data_source_1.myDataSource.getRepository(taxa_1.Taxa);
                         tarRep = app_data_source_1.myDataSource.getRepository(tar_1.Tar);
+                        descRep = app_data_source_1.myDataSource.getRepository(desconto_1.Desconto);
                         return [4 /*yield*/, taxaRep.findOne({ where: { nome: "Audiovisual" } })];
                     case 2:
                         audiovisual = _b.sent();
@@ -77,9 +79,13 @@ var ResultadoController = /** @class */ (function () {
                         return [4 /*yield*/, taxaRep.findOne({ where: { nome: "IVA", valor: "23" } })];
                     case 6:
                         iva23 = _b.sent();
+                        return [4 /*yield*/, descRep.findOne({ where: { tipo: desconto } })];
+                    case 7:
+                        desc = _b.sent();
                         iva6F = iva6.valor;
                         iva23F = iva23.valor;
                         contagem = vazio + ponta + cheio;
+                        subtotal = 0;
                         total = 0;
                         cemkW = 0;
                         resto = 0;
@@ -90,22 +96,22 @@ var ResultadoController = /** @class */ (function () {
                         iecTotal = 0;
                         iva = 0;
                         tar = 0;
-                        desconto = 0;
+                        descontoT = 0;
                         valor = void 0;
                         precoVazio = 0;
                         precoNaoVazio = 0;
                         i = 1;
                         resultDataSent = [];
-                        if (!(tarifa == "Simples")) return [3 /*break*/, 24];
-                        if (!(potencia < "10.35")) return [3 /*break*/, 18];
-                        if (!(potencia <= "3.45")) return [3 /*break*/, 12];
-                        _b.label = 7;
-                    case 7: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
-                    case 8:
+                        if (!(tarifa == "Simples")) return [3 /*break*/, 25];
+                        if (!(potencia < "10.35")) return [3 /*break*/, 19];
+                        if (!(potencia <= "3.45")) return [3 /*break*/, 13];
+                        _b.label = 8;
+                    case 8: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
+                    case 9:
                         valPot = _b.sent();
                         valor = valPot.valor;
                         return [4 /*yield*/, tarRep.findOneBy({ potencia: potencia })];
-                    case 9:
+                    case 10:
                         tarPot = _b.sent();
                         precoPot = valPot.valorPotencia;
                         gasto = valPot.valorSimples;
@@ -122,7 +128,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (contagem * gasto * (iva6F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -151,7 +164,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (100 * gasto * (iva6F / 100)) + ((contagem - 100) * gasto * (iva23F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -170,19 +190,19 @@ var ResultadoController = /** @class */ (function () {
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
-                        _b.label = 10;
-                    case 10:
-                        if (i <= max.max) return [3 /*break*/, 7];
                         _b.label = 11;
                     case 11:
+                        if (i <= max.max) return [3 /*break*/, 8];
+                        _b.label = 12;
+                    case 12:
                         result = resultDataSent.filter(function (element) { return element !== null; });
                         return [2 /*return*/, res.status(200).json({ result: result })];
-                    case 12: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
-                    case 13:
+                    case 13: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
+                    case 14:
                         valPot = _b.sent();
                         valor = valPot.valor;
                         return [4 /*yield*/, tarRep.findOneBy({ potencia: potencia })];
-                    case 14:
+                    case 15:
                         tarPot = _b.sent();
                         precoPot = valPot.valorPotencia;
                         gasto = valPot.valorSimples;
@@ -199,7 +219,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (contagem * gasto * (iva6F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -228,7 +255,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (100 * gasto * (iva6F / 100)) + ((contagem - 100) * gasto * (iva23F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -247,20 +281,20 @@ var ResultadoController = /** @class */ (function () {
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
-                        _b.label = 15;
-                    case 15:
-                        if (i <= max.max) return [3 /*break*/, 12];
                         _b.label = 16;
                     case 16:
+                        if (i <= max.max) return [3 /*break*/, 13];
+                        _b.label = 17;
+                    case 17:
                         result = resultDataSent.filter(function (element) { return element !== null; });
                         return [2 /*return*/, res.status(200).json({ result: result })];
-                    case 17: return [3 /*break*/, 23];
-                    case 18: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
-                    case 19:
+                    case 18: return [3 /*break*/, 24];
+                    case 19: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
+                    case 20:
                         valPot = _b.sent();
                         valor = valPot.valor;
                         return [4 /*yield*/, tarRep.findOneBy({ potencia: potencia })];
-                    case 20:
+                    case 21:
                         tarPot = _b.sent();
                         precoPot = valPot.valorPotencia;
                         gasto = valPot.valorSimples;
@@ -276,7 +310,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (contagem * gasto * (iva23F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + ((tarPot.simples * contagem) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -293,24 +334,24 @@ var ResultadoController = /** @class */ (function () {
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
-                        _b.label = 21;
-                    case 21:
-                        if (i <= max.max) return [3 /*break*/, 18];
                         _b.label = 22;
                     case 22:
+                        if (i <= max.max) return [3 /*break*/, 19];
+                        _b.label = 23;
+                    case 23:
                         result = resultDataSent.filter(function (element) { return element !== null; });
                         return [2 /*return*/, res.status(200).json({ result: result })];
-                    case 23: return [3 /*break*/, 41];
-                    case 24:
-                        if (!(potencia < "10.35")) return [3 /*break*/, 36];
-                        if (!(potencia <= "3.45")) return [3 /*break*/, 30];
-                        _b.label = 25;
-                    case 25: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
-                    case 26:
+                    case 24: return [3 /*break*/, 42];
+                    case 25:
+                        if (!(potencia < "10.35")) return [3 /*break*/, 37];
+                        if (!(potencia <= "3.45")) return [3 /*break*/, 31];
+                        _b.label = 26;
+                    case 26: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
+                    case 27:
                         valPot = _b.sent();
                         valor = valPot.valor;
                         return [4 /*yield*/, tarRep.findOneBy({ potencia: potencia })];
-                    case 27:
+                    case 28:
                         tarPot = _b.sent();
                         precoPot = valPot.valorPotencia;
                         valorVazio = valPot.valorVazio;
@@ -329,7 +370,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (vazio * valorVazio * (iva6F / 100)) + ((ponta + cheio) * valorNaoVazio * (iva6F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoVazio = precoVazio.toFixed(2);
@@ -362,7 +410,14 @@ var ResultadoController = /** @class */ (function () {
                                 (((ponta + cheio) - (((ponta + cheio) * 100) / contagem)) * valorNaoVazio * (iva23F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva6F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -383,19 +438,19 @@ var ResultadoController = /** @class */ (function () {
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
-                        _b.label = 28;
-                    case 28:
-                        if (i <= max.max) return [3 /*break*/, 25];
                         _b.label = 29;
                     case 29:
+                        if (i <= max.max) return [3 /*break*/, 26];
+                        _b.label = 30;
+                    case 30:
                         result = resultDataSent.filter(function (element) { return element !== null; });
                         return [2 /*return*/, res.status(200).json({ result: result })];
-                    case 30: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
-                    case 31:
+                    case 31: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
+                    case 32:
                         valPot = _b.sent();
                         valor = valPot.valor;
                         return [4 /*yield*/, tarRep.findOneBy({ potencia: potencia })];
-                    case 32:
+                    case 33:
                         tarPot = _b.sent();
                         precoPot = valPot.valorPotencia;
                         valorVazio = valPot.valorVazio;
@@ -414,7 +469,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (vazio * valorVazio * (iva6F / 100)) + ((ponta + cheio) * valorNaoVazio * (iva6F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoVazio = precoVazio.toFixed(2);
@@ -447,7 +509,14 @@ var ResultadoController = /** @class */ (function () {
                                 (((ponta + cheio) - (((ponta + cheio) * 100) / contagem)) * valorNaoVazio * (iva23F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -468,20 +537,20 @@ var ResultadoController = /** @class */ (function () {
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
-                        _b.label = 33;
-                    case 33:
-                        if (i <= max.max) return [3 /*break*/, 30];
                         _b.label = 34;
                     case 34:
+                        if (i <= max.max) return [3 /*break*/, 31];
+                        _b.label = 35;
+                    case 35:
                         result = resultDataSent.filter(function (element) { return element !== null; });
                         return [2 /*return*/, res.status(200).json({ result: result })];
-                    case 35: return [3 /*break*/, 41];
-                    case 36: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
-                    case 37:
+                    case 36: return [3 /*break*/, 42];
+                    case 37: return [4 /*yield*/, valorRep.findOneBy({ id: i })];
+                    case 38:
                         valPot = _b.sent();
                         valor = valPot.valor;
                         return [4 /*yield*/, tarRep.findOneBy({ potencia: potencia })];
-                    case 38:
+                    case 39:
                         tarPot = _b.sent();
                         precoPot = valPot.valorPotencia;
                         valorVazio = valPot.valorVazio;
@@ -498,7 +567,14 @@ var ResultadoController = /** @class */ (function () {
                             iva = (((vazio * valorVazio) + ((ponta + cheio) * valorNaoVazio)) * (iva23F / 100)) + ((precoPot * dias) * (iva23F / 100)) + (audiovisual.valor * (iva6F / 100)) +
                                 (dgeg.valor * (iva23F / 100)) + (iec.valor * contagem * (iva23F / 100));
                             tar = ((tarPot.valorPotencia * dias) * (1 + (iva23F / 100))) + (((tarPot.vazio * vazio) + (tarPot.naoVazio * (ponta + cheio))) * (1 + (iva23F / 100)));
-                            total = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            subtotal = precoEnergia + precoPotencia + audio + dgegTotal + iecTotal;
+                            if (desc.percentagem == 0) {
+                                total = subtotal;
+                            }
+                            else {
+                                descontoT = subtotal * (desc.percentagem / 100);
+                                total = subtotal - descontoT;
+                            }
                             resultDataSent[i - 1] = new resultado_dto_1.ResultadoResponse();
                             resultDataSent[i - 1].comercializador = valPot.comercializador;
                             resultDataSent[i - 1].precoTotal = total.toFixed(2);
@@ -515,19 +591,19 @@ var ResultadoController = /** @class */ (function () {
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
-                        _b.label = 39;
-                    case 39:
-                        if (i <= max.max) return [3 /*break*/, 36];
                         _b.label = 40;
                     case 40:
+                        if (i <= max.max) return [3 /*break*/, 37];
+                        _b.label = 41;
+                    case 41:
                         result = resultDataSent.filter(function (element) { return element !== null; });
                         return [2 /*return*/, res.status(200).json({ result: result })];
-                    case 41: return [3 /*break*/, 43];
-                    case 42:
+                    case 42: return [3 /*break*/, 44];
+                    case 43:
                         error_1 = _b.sent();
                         console.error(error_1);
                         return [2 /*return*/, res.status(500).json({ message: "Internal server error" })];
-                    case 43: return [2 /*return*/];
+                    case 44: return [2 /*return*/];
                 }
             });
         });
