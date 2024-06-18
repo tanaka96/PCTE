@@ -149,7 +149,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -186,7 +186,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -240,7 +240,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -277,7 +277,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -330,7 +330,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -392,7 +392,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -434,7 +434,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -491,7 +491,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -533,7 +533,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }
@@ -587,7 +587,7 @@ var ResultadoController = /** @class */ (function () {
                                 IVA: iva.toFixed(2)
                             };
                             resultDataSent[i - 1].tar = tar.toFixed(2);
-                            resultDataSent[i - 1].desconto = desconto.toFixed(2);
+                            resultDataSent[i - 1].desconto = descontoT.toFixed(2);
                             resultDataSent[i - 1].valor = valor;
                             i++;
                         }

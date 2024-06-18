@@ -87,7 +87,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             } else if (contagem > 100){
@@ -121,7 +121,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             }
@@ -170,7 +170,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             } else if (contagem > 100){
@@ -204,7 +204,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             }
@@ -250,7 +250,7 @@ export class ResultadoController {
                                 IEC: iecTotal.toFixed(2),
                                 IVA: iva.toFixed(2)}
                             resultDataSent[i-1].tar = tar.toFixed(2)
-                            resultDataSent[i-1].desconto = desconto.toFixed(2)
+                            resultDataSent[i-1].desconto = descontoT.toFixed(2)
                             resultDataSent[i-1].valor = valor
                             i++
                         }
@@ -304,7 +304,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             } else if (contagem > 100){
@@ -343,7 +343,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             }
@@ -395,7 +395,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             } else if (contagem > 100){
@@ -434,7 +434,7 @@ export class ResultadoController {
                                     IEC: iecTotal.toFixed(2),
                                     IVA: iva.toFixed(2)}
                                 resultDataSent[i-1].tar = tar.toFixed(2)
-                                resultDataSent[i-1].desconto = desconto.toFixed(2)
+                                resultDataSent[i-1].desconto = descontoT.toFixed(2)
                                 resultDataSent[i-1].valor = valor
                                 i++
                             }
@@ -483,7 +483,7 @@ export class ResultadoController {
                                 IEC: iecTotal.toFixed(2),
                                 IVA: iva.toFixed(2)}
                             resultDataSent[i-1].tar = tar.toFixed(2)
-                            resultDataSent[i-1].desconto = desconto.toFixed(2)
+                            resultDataSent[i-1].desconto = descontoT.toFixed(2)
                             resultDataSent[i-1].valor = valor
                             i++
                         }
