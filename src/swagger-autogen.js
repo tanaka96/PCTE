@@ -44,6 +44,9 @@ const config = {
     }, {
         name: 'Resultado',
         description: 'Endpoints',
+    }, {
+        name: 'Verificação',
+        description: 'Endpoints',
     }],
     host: 'pcte.onrender.com',
     schemes: 'https',

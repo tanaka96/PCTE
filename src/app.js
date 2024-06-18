@@ -34,6 +34,7 @@ app.post("/signup", utilizador_controller_1.UtilizadorController.signUp);
 app.post("/login", auth_controller_1.AuthController.login);
 app.post("/resultado", resultado_controller_1.ResultadoController.Resultado);
 app.get("/verificacao/:token", function (req, res) {
+    // #swagger.tags = ['Verificação']
     var token = req.params.token;
     jwt.verify(token, process.env.TOKEN_SECRET, function (err, decoded) {
         if (err) {

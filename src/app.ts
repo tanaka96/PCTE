@@ -95,6 +95,8 @@ app.post("/resultado", ResultadoController.Resultado,
 );
 
 app.get("/verificacao/:token", (req, res) => {
+    // #swagger.tags = ['Verificação']
+
     const {token} = req.params;
 
     jwt.verify(token, process.env.TOKEN_SECRET, function (err, decoded) {
