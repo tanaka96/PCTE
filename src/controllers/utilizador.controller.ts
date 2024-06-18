@@ -2,12 +2,29 @@ import { Request, Response } from "express";
 import { myDataSource } from "../app-data-source";
 import { Utilizador } from "../entity/utilizador";
 import { encrypt } from "../helpers/encrypt";
+import { sendEmail } from "../helpers/tokenSender"
 import { UserResponse } from "../dto/user.dto";
 import * as cache from "memory-cache";
+const { validate } = require('deep-email-validator');
 
 export class UtilizadorController {
     static async signUp(req: Request, res: Response) {
-        const { first_name, last_name, email, password, admin } = req.body;
+        const { first_name, last_name, email, password, verificacao_pw, admin } = req.body;
+        const resultado = await validate(email);
+        if (!resultado.valid){
+            return res.status(400).send({
+                status: 'error',
+                message: 'Endereço de email inválido!',
+                reason: resultado.reason
+            });
+        }
+
+        if (password != verificacao_pw){
+            return res.status(400).json({
+                status: 'error',
+                message: 'Passwords diferentes!'
+            });
+        }
         const encryptedPassword = await encrypt.encryptpass(password);
         const utilizador = new Utilizador();
         utilizador.first_name = first_name;
@@ -31,7 +48,8 @@ export class UtilizadorController {
         userDataSent.role = utilizador.admin;
 
         const token = encrypt.generateToken({id: utilizador.id.toString()});
-        return res.status(200).json({message: "Utilizador criado com sucesso", token, userDataSent});
+        await sendEmail(utilizador.email, token)
+        return res.status(200).json({message: "Utilizador criado com sucesso", userDataSent});
     }
 
     static async getUtilizadores(req: Request, res: Response) {

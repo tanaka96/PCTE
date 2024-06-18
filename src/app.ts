@@ -5,6 +5,7 @@ import { AuthController } from "./controllers/auth.controller";
 import { authentication } from "./middleware/authentification";
 import { authorization } from "./middleware/authorization";
 import { ResultadoController } from "./controllers/resultado.controller";
+const jwt = require('jsonwebtoken');
 
 
 const cookieParser = require("cookie-parser");
@@ -92,6 +93,19 @@ app.post("/resultado", ResultadoController.Resultado,
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
 );
+
+app.get("/verificacao/:token", (req, res) => {
+    const {token} = req.params;
+
+    jwt.verify(token, process.env.TOKEN_SECRET, function (err, decoded) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({error: "Verificação falhada! Link incorreto ou expirado!"});
+        } else {
+            res.status(200).json({message: "Conta verificada com sucesso! Bem-vindo!"})
+        }
+    })
+});
 
 
 app.listen(port, () => {

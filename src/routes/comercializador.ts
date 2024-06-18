@@ -16,7 +16,8 @@ comercializador.get("/", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              empresa: 'Exemplo'
+              empresa: 'Exemplo',
+              logo: 'content\\logos\\exemplo.png'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -31,7 +32,8 @@ comercializador.get("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              empresa: 'Exemplo'
+              empresa: 'Exemplo',
+              logo: 'content\\logos\\exemplo.png'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -67,7 +69,8 @@ comercializador.put("/:id", async function (req: Request, res: Response) {
           description: 'Success',
           schema: {
               id: 1,
-              empresa: 'Exemplo'
+              empresa: 'Exemplo',
+              logo: 'content\\logos\\exemplo.png'
           }
   } */
     // #swagger.responses[404] = { description: 'Not Found' }
@@ -104,6 +107,16 @@ comercializador.delete("/:id", async function (req: Request, res: Response) {
 })
 
 comercializador.put("/upload/:id", upload.single("logo"), async (req, res) => {
+    // #swagger.tags = ['Comercializador']
+    /* #swagger.responses[200] = {
+          description: 'Success',
+          schema: {
+              id: 1,
+              empresa: 'Exemplo',
+              logo: 'content\\logos\\exemplo.png'
+          }
+  } */
+    // #swagger.responses[404] = { description: 'Not Found' }
     let comercializador: any
     if (!await myDataSource.getRepository(Comercializador).findOneBy({id: +req.params.id})) {
         return res.status(404).send("Comercializador não encontrado")

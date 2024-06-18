@@ -13,6 +13,6 @@ export class encrypt {
     }
 
     static generateToken(payload: payload) {
-        return jwt.sign(payload, process.env.TOKEN_SECRET, {})
+        return jwt.sign(payload, process.env.TOKEN_SECRET, {expiresIn: '10m'})
     }
 }

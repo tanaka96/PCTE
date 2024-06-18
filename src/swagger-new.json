@@ -141,6 +141,9 @@
                 "password": {
                   "example": "any"
                 },
+                "verificacao_pw": {
+                  "example": "any"
+                },
                 "admin": {
                   "example": "any"
                 }
@@ -151,6 +154,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -220,6 +226,9 @@
                   "example": "any"
                 },
                 "cheio": {
+                  "example": "any"
+                },
+                "desconto": {
                   "example": "any"
                 }
               }
@@ -312,6 +321,27 @@
         }
       }
     },
+    "/verificacao/{token}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/comercializador/": {
       "get": {
         "tags": [
@@ -331,6 +361,10 @@
                 "empresa": {
                   "type": "string",
                   "example": "Exemplo"
+                },
+                "logo": {
+                  "type": "string",
+                  "example": "content\\logos\\exemplo.png"
                 }
               },
               "xml": {
@@ -401,6 +435,10 @@
                 "empresa": {
                   "type": "string",
                   "example": "Exemplo"
+                },
+                "logo": {
+                  "type": "string",
+                  "example": "content\\logos\\exemplo.png"
                 }
               },
               "xml": {
@@ -439,6 +477,10 @@
                 "empresa": {
                   "type": "string",
                   "example": "Exemplo"
+                },
+                "logo": {
+                  "type": "string",
+                  "example": "content\\logos\\exemplo.png"
                 }
               },
               "xml": {
@@ -493,6 +535,9 @@
     },
     "/comercializador/upload/{id}": {
       "put": {
+        "tags": [
+          "Comercializador"
+        ],
         "description": "",
         "parameters": [
           {
@@ -504,7 +549,27 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "empresa": {
+                  "type": "string",
+                  "example": "Exemplo"
+                },
+                "logo": {
+                  "type": "string",
+                  "example": "content\\logos\\exemplo.png"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
             "description": "Not Found"

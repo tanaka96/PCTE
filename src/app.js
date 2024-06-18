@@ -7,6 +7,7 @@ var auth_controller_1 = require("./controllers/auth.controller");
 var authentification_1 = require("./middleware/authentification");
 var authorization_1 = require("./middleware/authorization");
 var resultado_controller_1 = require("./controllers/resultado.controller");
+var jwt = require('jsonwebtoken');
 var cookieParser = require("cookie-parser");
 var swaggerUi = require("swagger-ui-express");
 var swaggerFile = require('./swagger-new.json');
@@ -32,6 +33,18 @@ app.get("/perfil", authentification_1.authentication, (0, authorization_1.author
 app.post("/signup", utilizador_controller_1.UtilizadorController.signUp);
 app.post("/login", auth_controller_1.AuthController.login);
 app.post("/resultado", resultado_controller_1.ResultadoController.Resultado);
+app.get("/verificacao/:token", function (req, res) {
+    var token = req.params.token;
+    jwt.verify(token, process.env.TOKEN_SECRET, function (err, decoded) {
+        if (err) {
+            console.log(err);
+            res.status(400).json({ error: "Verificação falhada! Link incorreto ou expirado!" });
+        }
+        else {
+            res.status(200).json({ message: "Conta verificada com sucesso! Bem-vindo!" });
+        }
+    });
+});
 app.listen(port, function () {
     console.log('Running on 3000');
 });

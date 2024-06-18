@@ -55,7 +55,7 @@ var encrypt = /** @class */ (function () {
         return bcrypt.compareSync(password, encryptedPassword);
     };
     encrypt.generateToken = function (payload) {
-        return jwt.sign(payload, process.env.TOKEN_SECRET, {});
+        return jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '10m' });
     };
     return encrypt;
 }());
