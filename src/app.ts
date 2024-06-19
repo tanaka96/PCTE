@@ -6,6 +6,7 @@ import { authentication } from "./middleware/authentification";
 import { authorization } from "./middleware/authorization";
 import { ResultadoController } from "./controllers/resultado.controller";
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 
 const cookieParser = require("cookie-parser");
@@ -22,6 +23,7 @@ const app = express()
 const port = process.env.PORT
 
 app.use(express.json());
+app.use(cors())
 
 app.use('/comercializador', require('./routes/comercializador.ts'))
 

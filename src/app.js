@@ -8,6 +8,7 @@ var authentification_1 = require("./middleware/authentification");
 var authorization_1 = require("./middleware/authorization");
 var resultado_controller_1 = require("./controllers/resultado.controller");
 var jwt = require('jsonwebtoken');
+var cors = require('cors');
 var cookieParser = require("cookie-parser");
 var swaggerUi = require("swagger-ui-express");
 var swaggerFile = require('./swagger-new.json');
@@ -19,6 +20,7 @@ app_data_source_1.myDataSource.initialize().then(function () {
 var app = express();
 var port = process.env.PORT;
 app.use(express.json());
+app.use(cors());
 app.use('/comercializador', require('./routes/comercializador.ts'));
 app.use('/desconto', require('./routes/desconto.ts'));
 app.use('/potencia', require('./routes/potencia.ts'));
