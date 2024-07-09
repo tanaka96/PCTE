@@ -71,7 +71,7 @@ var AuthController = /** @class */ (function () {
                         utilizador = _b.sent();
                         validPassword = encrypt_1.encrypt.comparePassword(password, utilizador.password);
                         if (!utilizador || !validPassword) {
-                            return [2 /*return*/, res.status(404).json({ message: "Utilizador não encontrado!" })];
+                            return [2 /*return*/, res.status(404).json({ message: "Email ou password incorreto!" })];
                         }
                         token = encrypt_1.encrypt.generateToken({ id: utilizador.id.toString() });
                         return [2 /*return*/, res.status(200).json({ message: "Sessão iniciada", utilizador: utilizador, token: token })];

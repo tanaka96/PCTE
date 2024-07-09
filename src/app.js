@@ -49,5 +49,5 @@ app.get("/verificacao/:token", function (req, res) {
     });
 });
 app.listen(port, function () {
-    console.log('Running on 3000');
+    console.log('Running on ' + port);
 });

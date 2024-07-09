@@ -113,5 +113,5 @@ app.get("/verificacao/:token", (req, res) => {
 
 
 app.listen(port, () => {
-    console.log('Running on 3000');
+    console.log('Running on ' + port);
 });

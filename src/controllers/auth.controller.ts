@@ -16,7 +16,7 @@ export class AuthController {
 
             const validPassword = encrypt.comparePassword(password, utilizador.password);
             if (!utilizador || !validPassword) {
-                return res.status(404).json({message: "Utilizador não encontrado!"});
+                return res.status(404).json({message: "Email ou password incorreto!"});
             }
 
             const token = encrypt.generateToken({id: utilizador.id.toString()});
