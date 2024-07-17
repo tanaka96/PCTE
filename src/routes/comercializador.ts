@@ -3,7 +3,6 @@ import {Request, Response} from "express"
 import {Comercializador} from "../entity/comercializador";
 import {myDataSource} from "../app-data-source";
 import { upload } from "../controllers/logo.controller"
-import * as multer from "multer"
 
 
 const comercializador = express()
@@ -50,6 +49,12 @@ comercializador.get("/:id", async function (req: Request, res: Response) {
 
 comercializador.post("/", async function (req: Request, res: Response) {
     // #swagger.tags = ['Comercializador']
+    /*  #swagger.parameters['body'] = {
+            in: 'body',
+            schema: {
+                $empresa: 'exemplo'
+            }
+    } */
     /* #swagger.responses[201] = {
           description: 'Created',
           schema: {
@@ -65,6 +70,12 @@ comercializador.post("/", async function (req: Request, res: Response) {
 
 comercializador.put("/:id", async function (req: Request, res: Response) {
     // #swagger.tags = ['Comercializador']
+    /*  #swagger.parameters['body'] = {
+            in: 'body',
+            schema: {
+                $empresa: 'exemplo'
+            }
+    } */
     /* #swagger.responses[200] = {
           description: 'Success',
           schema: {
