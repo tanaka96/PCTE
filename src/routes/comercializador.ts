@@ -109,7 +109,7 @@ comercializador.delete("/:id", async function (req: Request, res: Response) {
 comercializador.put("/upload/:id", upload.single("logo"), async (req, res) => {
     // #swagger.tags = ['Comercializador']
     /* #swagger.consumes = ['multipart/form-data']
-       #swagger.parameters['singleFile'] = {
+       #swagger.parameters['logo'] = {
           in: 'formData',
           type: 'file',
           required: 'true'
