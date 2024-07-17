@@ -10,14 +10,14 @@ const { validate } = require('deep-email-validator');
 export class UtilizadorController {
     static async signUp(req: Request, res: Response) {
         const { first_name, last_name, email, password, verificacao_pw, admin } = req.body;
-        const resultado = await validate(email);
+        /*const resultado = await validate(email);
         if (!resultado.valid){
             return res.status(400).send({
                 status: 'error',
                 message: 'Endereço de email inválido!',
                 reason: resultado.reason
             });
-        }
+        }*/
 
         if (password != verificacao_pw){
             return res.status(400).json({

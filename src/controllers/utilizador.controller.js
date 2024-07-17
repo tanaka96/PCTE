@@ -49,21 +49,19 @@ var UtilizadorController = /** @class */ (function () {
     }
     UtilizadorController.signUp = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, first_name, last_name, email, password, verificacao_pw, admin, resultado, encryptedPassword, utilizador, utilizadorRep, userEmail, userDataSent, token;
+            var _a, first_name, last_name, email, password, verificacao_pw, admin, encryptedPassword, utilizador, utilizadorRep, userEmail, userDataSent, token;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         _a = req.body, first_name = _a.first_name, last_name = _a.last_name, email = _a.email, password = _a.password, verificacao_pw = _a.verificacao_pw, admin = _a.admin;
-                        return [4 /*yield*/, validate(email)];
-                    case 1:
-                        resultado = _b.sent();
-                        if (!resultado.valid) {
-                            return [2 /*return*/, res.status(400).send({
-                                    status: 'error',
-                                    message: 'Endereço de email inválido!',
-                                    reason: resultado.reason
-                                })];
-                        }
+                        /*const resultado = await validate(email);
+                        if (!resultado.valid){
+                            return res.status(400).send({
+                                status: 'error',
+                                message: 'Endereço de email inválido!',
+                                reason: resultado.reason
+                            });
+                        }*/
                         if (password != verificacao_pw) {
                             return [2 /*return*/, res.status(400).json({
                                     status: 'error',
@@ -71,7 +69,7 @@ var UtilizadorController = /** @class */ (function () {
                                 })];
                         }
                         return [4 /*yield*/, encrypt_1.encrypt.encryptpass(password)];
-                    case 2:
+                    case 1:
                         encryptedPassword = _b.sent();
                         utilizador = new utilizador_1.Utilizador();
                         utilizador.first_name = first_name;
@@ -81,25 +79,25 @@ var UtilizadorController = /** @class */ (function () {
                         utilizador.admin = admin;
                         utilizadorRep = app_data_source_1.myDataSource.getRepository(utilizador_1.Utilizador);
                         return [4 /*yield*/, utilizadorRep.findOne({ where: { email: email } })];
-                    case 3:
+                    case 2:
                         userEmail = _b.sent();
-                        if (!userEmail) return [3 /*break*/, 4];
+                        if (!userEmail) return [3 /*break*/, 3];
                         return [2 /*return*/, res.json({ message: "Email já se encontra registado!" })];
-                    case 4: return [4 /*yield*/, utilizadorRep.create(utilizador)];
-                    case 5:
+                    case 3: return [4 /*yield*/, utilizadorRep.create(utilizador)];
+                    case 4:
                         _b.sent();
                         return [4 /*yield*/, utilizadorRep.save(utilizador)];
-                    case 6:
+                    case 5:
                         _b.sent();
-                        _b.label = 7;
-                    case 7:
+                        _b.label = 6;
+                    case 6:
                         userDataSent = new user_dto_1.UserResponse();
                         userDataSent.name = utilizador.first_name;
                         userDataSent.email = utilizador.email;
                         userDataSent.role = utilizador.admin;
                         token = encrypt_1.encrypt.generateToken({ id: utilizador.id.toString() });
                         return [4 /*yield*/, (0, tokenSender_1.sendEmail)(utilizador.email, token)];
-                    case 8:
+                    case 7:
                         _b.sent();
                         return [2 /*return*/, res.status(200).json({ message: "Utilizador criado com sucesso", userDataSent: userDataSent })];
                 }
