@@ -74,7 +74,7 @@ var AuthController = /** @class */ (function () {
                             return [2 /*return*/, res.status(404).json({ message: "Email ou password incorreto!" })];
                         }
                         token = encrypt_1.encrypt.generateToken({ id: utilizador.id.toString() });
-                        return [2 /*return*/, res.status(200).json({ message: "Sessão iniciada", utilizador: utilizador, token: token })];
+                        return [2 /*return*/, res.status(200).json({ message: "Sessão iniciada", token: token })];
                     case 2:
                         error_1 = _b.sent();
                         console.error(error_1);

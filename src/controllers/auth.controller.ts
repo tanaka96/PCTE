@@ -21,7 +21,7 @@ export class AuthController {
 
             const token = encrypt.generateToken({id: utilizador.id.toString()});
 
-            return res.status(200).json({message: "Sessão iniciada", utilizador, token});
+            return res.status(200).json({message: "Sessão iniciada", token});
         } catch (error) {
             console.error(error);
             return res.status(500).json({message: "Internal Server Error!"});
